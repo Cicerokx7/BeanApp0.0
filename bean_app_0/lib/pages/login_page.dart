@@ -38,23 +38,46 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
-      if (e.code == 'user-not-found' || e.code == 'wrong-password') {
+      if (e.code == 'invalid-credential' ||
+          e.code == 'account-exists-with-different-credential' ||
+          e.code == 'operation-not-allowed' ||
+          e.code == 'user-disabled' ||
+          e.code == 'user-not-found' ||
+          e.code == 'wrong-password') {
         // print("Invalid Email or Password");
-        signInError();
+        signInError('Incorrect Password or Email');
+      } else {
+        signInError(e.message ?? "Error");
       }
     }
 
     // Navigator.pop(context);
   }
 
-  void signInError() {
+  void signInError(String test) {
     showDialog(
         context: context,
         builder: (context) {
-          return const AlertDialog(
-            title: Text('Incorrect Password or Email'),
+          return AlertDialog(
+            title: Text(test),
           );
         });
+    // @override
+    // Widget build(BuildContext context) {
+    //   return ElevatedButton(
+    //     onPressed: () {
+    //       showDialog(
+    //         context: context,
+    //         builder: (context) {
+    //           return AlertDialog(
+    //             title: Text('Incorrect Password or Email'),
+    //           );
+    //         },
+    //       );
+    //     },
+    //     child: Text('Show Dialog'),
+    //   );
+    // }
   }
 
   void signinApple() {}
@@ -67,6 +90,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
         //#d6a606
         backgroundColor: Colors.black,
+        // backgroundColor: const Color.fromARGB(255, 219, 78, 78),
         // ignore: prefer_const_constructors
         body: SafeArea(
           // ignore: prefer_const_constructors

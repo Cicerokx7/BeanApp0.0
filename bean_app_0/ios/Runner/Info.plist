@@ -18,8 +18,8 @@
 			<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
 			<string>com.googleusercontent.apps.339349232348-4j9m6kemd1di7f0djikvpjimfe28f4ck</string>
 		</array>
-	</dict>
-</array>
+		</dict>
+	</array>
 <!-- End of the Google Sign-in Section -->
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
