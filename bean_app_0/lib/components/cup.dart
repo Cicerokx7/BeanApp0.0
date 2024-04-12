@@ -34,13 +34,14 @@ class Cup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double width = 120;
+    const double width = 110;
 
     return Container(
-      margin: EdgeInsets.only(left: 25),
-      width: 180,
+      // margin: EdgeInsets.only(left: 25),
+      // width: 180,
       // decoration: BoxDecoration(),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Stack(children: [
             Center(
@@ -115,10 +116,12 @@ class Cup extends StatelessWidget {
                 ],
               ),
             ),
-            Image.asset(
-              'lib/images/SmallCup.png',
-              height: 160,
-              width: 200,
+            Center(
+              child: Image.asset(
+                'lib/images/SmallCup.png',
+                height: 149.6,
+                width: 200,
+              ),
             )
           ]),
           Text(

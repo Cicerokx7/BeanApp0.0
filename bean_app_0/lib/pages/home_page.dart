@@ -21,6 +21,18 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void toggleRecentsExpand() {
+    setState(() {
+      recentExpand = !recentExpand;
+    });
+  }
+
+  void toggleFavoritesExpand() {
+    setState(() {
+      favoriteExpand = !favoriteExpand;
+    });
+  }
+
   void signOut() {
     FirebaseAuth.instance.signOut();
   }
@@ -29,7 +41,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final standardCoffeeStack = [
       const Cup(
-        espresso: 45.0,
+        espresso: 34.0,
         hotWater: 0.0,
         syrupOne: 0.0,
         syrupTwo: 0.0,
@@ -39,12 +51,12 @@ class _HomePageState extends State<HomePage> {
         syrupSix: 0.0,
         steamedMilk: 35.0,
         milkFoam: 45.0,
-        empty: 0.0,
+        empty: 0.6,
         title: "Orange Mocha Frapacino",
       ),
       const Cup(
         espresso: 35.0,
-        hotWater: 35.0,
+        hotWater: 24.0,
         syrupOne: 0.0,
         syrupTwo: 25.0,
         syrupThree: 0.0,
@@ -53,7 +65,7 @@ class _HomePageState extends State<HomePage> {
         syrupSix: 0.0,
         steamedMilk: 0.0,
         milkFoam: 45.0,
-        empty: 0.0,
+        empty: 0.6,
         title: "Pinkidy Dinkidy",
       ),
       const Cup(
@@ -130,7 +142,7 @@ class _HomePageState extends State<HomePage> {
     final recentCoffeeStack = [
       const Cup(
         espresso: 35.0,
-        hotWater: 35.0,
+        hotWater: 24.0,
         syrupOne: 0.0,
         syrupTwo: 25.0,
         syrupThree: 0.0,
@@ -139,11 +151,11 @@ class _HomePageState extends State<HomePage> {
         syrupSix: 0.0,
         steamedMilk: 0.0,
         milkFoam: 45.0,
-        empty: 0.0,
+        empty: 0.6,
         title: "Pinkidy Dinkidy",
       ),
       const Cup(
-        espresso: 45.0,
+        espresso: 34.0,
         hotWater: 0.0,
         syrupOne: 0.0,
         syrupTwo: 0.0,
@@ -153,7 +165,7 @@ class _HomePageState extends State<HomePage> {
         syrupSix: 0.0,
         steamedMilk: 35.0,
         milkFoam: 45.0,
-        empty: 0.0,
+        empty: 0.6,
         title: "Orange Mocha Frapacino",
       ),
       const Cup(
@@ -229,7 +241,7 @@ class _HomePageState extends State<HomePage> {
     ];
     final favoritesCoffeeStack = [
       const Cup(
-        espresso: 45.0,
+        espresso: 34.0,
         hotWater: 0.0,
         syrupOne: 0.0,
         syrupTwo: 0.0,
@@ -239,12 +251,12 @@ class _HomePageState extends State<HomePage> {
         syrupSix: 0.0,
         steamedMilk: 35.0,
         milkFoam: 45.0,
-        empty: 0.0,
+        empty: 0.6,
         title: "Orange Mocha Frapacino",
       ),
       const Cup(
         espresso: 35.0,
-        hotWater: 35.0,
+        hotWater: 24.0,
         syrupOne: 0.0,
         syrupTwo: 25.0,
         syrupThree: 0.0,
@@ -253,7 +265,7 @@ class _HomePageState extends State<HomePage> {
         syrupSix: 0.0,
         steamedMilk: 0.0,
         milkFoam: 45.0,
-        empty: 0.0,
+        empty: 0.6,
         title: "Pinkidy Dinkidy",
       ),
       const Cup(
@@ -326,18 +338,18 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        // actions: <Widget>[
-        //   Builder(builder: (context) {
-        //     return IconButton(
-        //         onPressed: () {
-        //           Scaffold.of(context).openEndDrawer();
-        //         },
-        //         icon: const Icon(
-        //           Icons.shopping_cart,
-        //           color: Colors.white,
-        //         ));
-        //   }),
-        // ],
+        actions: <Widget>[
+          Builder(builder: (context) {
+            return IconButton(
+                onPressed: () {
+                  Scaffold.of(context).openEndDrawer();
+                },
+                icon: const Icon(
+                  Icons.shopping_cart,
+                  color: Colors.white,
+                ));
+          }),
+        ],
         leading: Builder(builder: (context) {
           return IconButton(
             icon: const Icon(
@@ -361,53 +373,6 @@ class _HomePageState extends State<HomePage> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       const Text(
-                        "Test",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          toggleStandardExpand();
-                        },
-                        child: Text(
-                          "expand",
-                          style:
-                              TextStyle(color: Colors.grey[600], fontSize: 16),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  // child: GridView.builder(
-                  // gridDelegate: SilverGridDelegateWithFixedCrossAxisCount, itemBuilder: itemBuilder)
-
-                  child: ListWheelScrollViewX.useDelegate(
-                    scrollDirection: Axis.horizontal,
-                    itemExtent: 200,
-                    childDelegate: ListWheelChildBuilderDelegate(
-                      builder: (context, index) {
-                        return standardCoffeeStack[index % 7];
-                      },
-                    ),
-                    // specify the height or width of each item based on the scroll direction,
-                    // scrollDirection: Axis.horizontal,
-                  ),
-                ),
-              ],
-            )
-          : Column(
-              children: [
-                // Standard
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 40),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      const Text(
                         "Standard",
                         style: TextStyle(
                             color: Colors.white,
@@ -419,7 +384,7 @@ class _HomePageState extends State<HomePage> {
                           toggleStandardExpand();
                         },
                         child: Text(
-                          "expand",
+                          "shrink",
                           style:
                               TextStyle(color: Colors.grey[600], fontSize: 16),
                         ),
@@ -428,90 +393,235 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 Expanded(
-                  child: ListWheelScrollViewX.useDelegate(
-                    scrollDirection: Axis.horizontal,
-                    itemExtent: 200,
-                    childDelegate: ListWheelChildBuilderDelegate(
-                      builder: (context, index) {
-                        return standardCoffeeStack[index % 7];
-                      },
-                    ),
-                    // specify the height or width of each item based on the scroll direction,
-                    // scrollDirection: Axis.horizontal,
-                  ),
-                ),
-
-                // Recomended
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 40),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      const Text(
-                        "Recent",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24),
-                      ),
-                      Text(
-                        "expand",
-                        style: TextStyle(color: Colors.grey[600], fontSize: 16),
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: ListWheelScrollViewX.useDelegate(
-                      scrollDirection: Axis.horizontal,
-                      childDelegate: ListWheelChildBuilderDelegate(
-                        builder: (context, index) {
-                          return recentCoffeeStack[index % 7];
-                        },
-                      ),
-                      itemExtent:
-                          200 // specify the height or width of each item based on the scroll direction,
-                      // scrollDirection: Axis.horizontal,
-                      ),
-                ),
-
-                // Custom
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 40),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      const Text(
-                        "Favorites",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24),
-                      ),
-                      Text(
-                        "expand",
-                        style: TextStyle(color: Colors.grey[600], fontSize: 16),
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: ListWheelScrollViewX.useDelegate(
-                      scrollDirection: Axis.horizontal,
-                      childDelegate: ListWheelChildBuilderDelegate(
-                        builder: (context, index) {
-                          return favoritesCoffeeStack[index % 7];
-                        },
-                      ),
-                      itemExtent:
-                          200 // specify the height or width of each item based on the scroll direction,
-                      // scrollDirection: Axis.horizontal,
-                      ),
-                ),
+                    child: GridView.builder(
+                        itemCount: standardCoffeeStack.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2),
+                        itemBuilder: (context, index) {
+                          return standardCoffeeStack[index % 7];
+                        })),
               ],
-            ),
+            )
+          : (recentExpand == true)
+              ? Column(
+                  children: [
+                    // Standard
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 40),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          const Text(
+                            "Recent",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 24),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              toggleRecentsExpand();
+                            },
+                            child: Text(
+                              "shrink",
+                              style: TextStyle(
+                                  color: Colors.grey[600], fontSize: 16),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                        child: GridView.builder(
+                            itemCount: recentCoffeeStack.length,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2),
+                            itemBuilder: (context, index) {
+                              return recentCoffeeStack[index % 7];
+                            })),
+                  ],
+                )
+              : (favoriteExpand)
+                  ? Column(
+                      children: [
+                        // Standard
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 40),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              const Text(
+                                "Favorite",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  toggleFavoritesExpand();
+                                },
+                                child: Text(
+                                  "shrink",
+                                  style: TextStyle(
+                                      color: Colors.grey[600], fontSize: 16),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                            child: GridView.builder(
+                                itemCount: favoritesCoffeeStack.length,
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 2),
+                                itemBuilder: (context, index) {
+                                  return favoritesCoffeeStack[index % 7];
+                                })),
+                      ],
+                    )
+                  : Column(
+                      children: [
+                        // Standard
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 40),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              const Text(
+                                "Standard",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  toggleStandardExpand();
+                                },
+                                child: Text(
+                                  "expand",
+                                  style: TextStyle(
+                                      color: Colors.grey[600], fontSize: 16),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: ListWheelScrollViewX.useDelegate(
+                            scrollDirection: Axis.horizontal,
+                            itemExtent: 200,
+                            childDelegate: ListWheelChildBuilderDelegate(
+                              builder: (context, index) {
+                                return GestureDetector(
+                                    onTap: () {
+                                      print("test");
+                                    },
+                                    child: standardCoffeeStack[index % 7]);
+                              },
+                            ),
+                            // specify the height or width of each item based on the scroll direction,
+                            // scrollDirection: Axis.horizontal,
+                          ),
+                        ),
+
+                        // Recomended
+                        Divider(
+                          thickness: 4,
+                          color: Colors.grey[600],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 40),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              const Text(
+                                "Recent",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  toggleRecentsExpand();
+                                },
+                                child: Text(
+                                  "expand",
+                                  style: TextStyle(
+                                      color: Colors.grey[600], fontSize: 16),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: ListWheelScrollViewX.useDelegate(
+                              scrollDirection: Axis.horizontal,
+                              childDelegate: ListWheelChildBuilderDelegate(
+                                builder: (context, index) {
+                                  return recentCoffeeStack[index % 7];
+                                },
+                              ),
+                              itemExtent:
+                                  200 // specify the height or width of each item based on the scroll direction,
+                              // scrollDirection: Axis.horizontal,
+                              ),
+                        ),
+
+                        // Custom
+                        Divider(
+                          thickness: 4,
+                          color: Colors.grey[600],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 40),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              const Text(
+                                "Favorites",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  toggleFavoritesExpand();
+                                },
+                                child: Text(
+                                  "expand",
+                                  style: TextStyle(
+                                      color: Colors.grey[600], fontSize: 16),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: ListWheelScrollViewX.useDelegate(
+                              scrollDirection: Axis.horizontal,
+                              childDelegate: ListWheelChildBuilderDelegate(
+                                builder: (context, index) {
+                                  return favoritesCoffeeStack[index % 7];
+                                },
+                              ),
+                              itemExtent:
+                                  200 // specify the height or width of each item based on the scroll direction,
+                              // scrollDirection: Axis.horizontal,
+                              ),
+                        ),
+                      ],
+                    ),
       drawer: Drawer(
         backgroundColor: Colors.grey[900],
         child: const Column(
@@ -525,6 +635,32 @@ class _HomePageState extends State<HomePage> {
                 ),
                 title: Text(
                   "Settings",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 25.0),
+              child: ListTile(
+                leading: Icon(
+                  Icons.location_on_outlined,
+                  color: Colors.white,
+                ),
+                title: Text(
+                  "Locations",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 25.0),
+              child: ListTile(
+                leading: Icon(
+                  Icons.info_outline,
+                  color: Colors.white,
+                ),
+                title: Text(
+                  "How to",
                   style: TextStyle(color: Colors.white),
                 ),
               ),
