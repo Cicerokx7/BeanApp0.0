@@ -1,3 +1,5 @@
+import "package:bean_app_0/components/cupData.dart";
+import "package:bean_app_0/pages/editCupPage.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 import 'package:list_wheel_scroll_view_nls/list_wheel_scroll_view_nls.dart';
@@ -40,7 +42,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final standardCoffeeStack = [
-      const Cup(
+      CupData(
         espresso: 34.0,
         hotWater: 0.0,
         syrupOne: 0.0,
@@ -52,9 +54,11 @@ class _HomePageState extends State<HomePage> {
         steamedMilk: 35.0,
         milkFoam: 45.0,
         empty: 0.6,
-        title: "Orange Mocha Frapacino",
+        title: "Orange Mocha Frappucino",
+        description:
+            "Is there anything more to life than being really really really ridiculously good looking? You know what can help you sort through this important issue? ORANGE MOCHA FRAPPUCINO!!!",
       ),
-      const Cup(
+      CupData(
         espresso: 35.0,
         hotWater: 24.0,
         syrupOne: 0.0,
@@ -68,7 +72,7 @@ class _HomePageState extends State<HomePage> {
         empty: 0.6,
         title: "Pinkidy Dinkidy",
       ),
-      const Cup(
+      CupData(
         espresso: 0.0,
         hotWater: 0.0,
         syrupOne: 0.0,
@@ -82,7 +86,7 @@ class _HomePageState extends State<HomePage> {
         empty: 1.0,
         title: "3",
       ),
-      const Cup(
+      CupData(
         espresso: 0.0,
         hotWater: 0.0,
         syrupOne: 0.0,
@@ -96,7 +100,7 @@ class _HomePageState extends State<HomePage> {
         empty: 1.0,
         title: "4",
       ),
-      const Cup(
+      CupData(
         espresso: 0.0,
         hotWater: 0.0,
         syrupOne: 0.0,
@@ -110,7 +114,7 @@ class _HomePageState extends State<HomePage> {
         empty: 1.0,
         title: "5",
       ),
-      const Cup(
+      CupData(
         espresso: 0.0,
         hotWater: 0.0,
         syrupOne: 0.0,
@@ -124,7 +128,7 @@ class _HomePageState extends State<HomePage> {
         empty: 1.0,
         title: "6",
       ),
-      const Cup(
+      CupData(
         espresso: 0.0,
         hotWater: 0.0,
         syrupOne: 0.0,
@@ -140,7 +144,7 @@ class _HomePageState extends State<HomePage> {
       ),
     ];
     final recentCoffeeStack = [
-      const Cup(
+      CupData(
         espresso: 35.0,
         hotWater: 24.0,
         syrupOne: 0.0,
@@ -154,7 +158,7 @@ class _HomePageState extends State<HomePage> {
         empty: 0.6,
         title: "Pinkidy Dinkidy",
       ),
-      const Cup(
+      CupData(
         espresso: 34.0,
         hotWater: 0.0,
         syrupOne: 0.0,
@@ -166,9 +170,11 @@ class _HomePageState extends State<HomePage> {
         steamedMilk: 35.0,
         milkFoam: 45.0,
         empty: 0.6,
-        title: "Orange Mocha Frapacino",
+        title: "Orange Mocha Frappucino",
+        description:
+            "Is there anything more to life than being really really really ridiculously good looking? You know what can help you sort through this important issue? ORANGE MOCHA FRAPPUCINO!!!",
       ),
-      const Cup(
+      CupData(
         espresso: 0.0,
         hotWater: 0.0,
         syrupOne: 0.0,
@@ -182,7 +188,7 @@ class _HomePageState extends State<HomePage> {
         empty: 1.0,
         title: "3",
       ),
-      const Cup(
+      CupData(
         espresso: 0.0,
         hotWater: 0.0,
         syrupOne: 0.0,
@@ -196,7 +202,7 @@ class _HomePageState extends State<HomePage> {
         empty: 1.0,
         title: "4",
       ),
-      const Cup(
+      CupData(
         espresso: 0.0,
         hotWater: 0.0,
         syrupOne: 0.0,
@@ -210,7 +216,7 @@ class _HomePageState extends State<HomePage> {
         empty: 1.0,
         title: "5",
       ),
-      const Cup(
+      CupData(
         espresso: 0.0,
         hotWater: 0.0,
         syrupOne: 0.0,
@@ -224,7 +230,7 @@ class _HomePageState extends State<HomePage> {
         empty: 1.0,
         title: "6",
       ),
-      const Cup(
+      CupData(
         espresso: 0.0,
         hotWater: 0.0,
         syrupOne: 0.0,
@@ -240,7 +246,7 @@ class _HomePageState extends State<HomePage> {
       ),
     ];
     final favoritesCoffeeStack = [
-      const Cup(
+      CupData(
         espresso: 34.0,
         hotWater: 0.0,
         syrupOne: 0.0,
@@ -252,9 +258,11 @@ class _HomePageState extends State<HomePage> {
         steamedMilk: 35.0,
         milkFoam: 45.0,
         empty: 0.6,
-        title: "Orange Mocha Frapacino",
+        title: "Orange Mocha Frappucino",
+        description:
+            "Is there anything more to life than being really really really ridiculously good looking? You know what can help you sort through this important issue? ORANGE MOCHA FRAPPUCINO!!!",
       ),
-      const Cup(
+      CupData(
         espresso: 35.0,
         hotWater: 24.0,
         syrupOne: 0.0,
@@ -268,7 +276,7 @@ class _HomePageState extends State<HomePage> {
         empty: 0.6,
         title: "Pinkidy Dinkidy",
       ),
-      const Cup(
+      CupData(
           espresso: 0.0,
           hotWater: 0.0,
           syrupOne: 0.0,
@@ -281,7 +289,7 @@ class _HomePageState extends State<HomePage> {
           milkFoam: 0.0,
           empty: 1.0,
           title: "3"),
-      const Cup(
+      CupData(
           espresso: 0.0,
           hotWater: 0.0,
           syrupOne: 0.0,
@@ -294,7 +302,7 @@ class _HomePageState extends State<HomePage> {
           milkFoam: 0.0,
           empty: 1.0,
           title: "4"),
-      const Cup(
+      CupData(
           espresso: 0.0,
           hotWater: 0.0,
           syrupOne: 0.0,
@@ -307,7 +315,7 @@ class _HomePageState extends State<HomePage> {
           milkFoam: 0.0,
           empty: 1.0,
           title: "5"),
-      const Cup(
+      CupData(
           espresso: 0.0,
           hotWater: 0.0,
           syrupOne: 0.0,
@@ -320,7 +328,7 @@ class _HomePageState extends State<HomePage> {
           milkFoam: 0.0,
           empty: 1.0,
           title: "6"),
-      const Cup(
+      CupData(
           espresso: 0.0,
           hotWater: 0.0,
           syrupOne: 0.0,
@@ -398,7 +406,20 @@ class _HomePageState extends State<HomePage> {
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2),
                         itemBuilder: (context, index) {
-                          return standardCoffeeStack[index % 7];
+                          return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => EditCupPage(
+                                            cup:
+                                                favoritesCoffeeStack[index % 7],
+                                          )),
+                                );
+                              },
+                              child: Cup(
+                                  data: standardCoffeeStack[index % 7],
+                                  size: 1));
                         })),
               ],
             )
@@ -439,7 +460,21 @@ class _HomePageState extends State<HomePage> {
                                 SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 2),
                             itemBuilder: (context, index) {
-                              return recentCoffeeStack[index % 7];
+                              return GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => EditCupPage(
+                                                cup: recentCoffeeStack[
+                                                    index % 7],
+                                              )),
+                                    );
+                                  },
+                                  child: Cup(
+                                    data: recentCoffeeStack[index % 7],
+                                    size: 1,
+                                  ));
                             })),
                   ],
                 )
@@ -480,7 +515,21 @@ class _HomePageState extends State<HomePage> {
                                     SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: 2),
                                 itemBuilder: (context, index) {
-                                  return favoritesCoffeeStack[index % 7];
+                                  return GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => EditCupPage(
+                                                    cup: favoritesCoffeeStack[
+                                                        index % 7],
+                                                  )),
+                                        );
+                                      },
+                                      child: Cup(
+                                        data: favoritesCoffeeStack[index % 7],
+                                        size: 1,
+                                      ));
                                 })),
                       ],
                     )
@@ -521,9 +570,18 @@ class _HomePageState extends State<HomePage> {
                               builder: (context, index) {
                                 return GestureDetector(
                                     onTap: () {
-                                      print("test");
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => EditCupPage(
+                                                  cup: standardCoffeeStack[
+                                                      index % 7],
+                                                )),
+                                      );
                                     },
-                                    child: standardCoffeeStack[index % 7]);
+                                    child: Cup(
+                                        data: standardCoffeeStack[index % 7],
+                                        size: 1));
                               },
                             ),
                             // specify the height or width of each item based on the scroll direction,
@@ -567,7 +625,20 @@ class _HomePageState extends State<HomePage> {
                               scrollDirection: Axis.horizontal,
                               childDelegate: ListWheelChildBuilderDelegate(
                                 builder: (context, index) {
-                                  return recentCoffeeStack[index % 7];
+                                  return GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => EditCupPage(
+                                                    cup: recentCoffeeStack[
+                                                        index % 7],
+                                                  )),
+                                        );
+                                      },
+                                      child: Cup(
+                                          data: recentCoffeeStack[index % 7],
+                                          size: 1));
                                 },
                               ),
                               itemExtent:
@@ -612,7 +683,19 @@ class _HomePageState extends State<HomePage> {
                               scrollDirection: Axis.horizontal,
                               childDelegate: ListWheelChildBuilderDelegate(
                                 builder: (context, index) {
-                                  return favoritesCoffeeStack[index % 7];
+                                  return GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => EditCupPage(
+                                                  cup: favoritesCoffeeStack[
+                                                      index % 7])),
+                                        );
+                                      },
+                                      child: Cup(
+                                          data: favoritesCoffeeStack[index % 7],
+                                          size: 1));
                                 },
                               ),
                               itemExtent:
