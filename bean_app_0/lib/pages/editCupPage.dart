@@ -1,24 +1,103 @@
-import "package:bean_app_0/components/cupData.dart";
-import "package:bean_app_0/components/my_slider.dart";
+// import "dart:ffi";
+
+import 'package:bean_app_0/components/cup.dart';
+import 'package:bean_app_0/components/cupData.dart';
+import 'package:bean_app_0/components/ingredientSlider.dart';
 import "package:bean_app_0/pages/home_page.dart";
 import "package:flutter/material.dart";
-import "../components/cup.dart";
+import '../components/cupDisplay.dart';
 import "../components/login_button_A.dart";
 
 class EditCupPage extends StatefulWidget {
-  final CupData cup;
-  const EditCupPage({
-    super.key,
-    required this.cup,
-  });
+  Cup originalCup;
+  Cup cup;
+  EditCupPage({
+    Key? key,
+    required this.originalCup,
+    // this.cup = originalCup.copy()
+  })
   @override
   State<EditCupPage> createState() => _EditCupState();
 }
 
 class _EditCupState extends State<EditCupPage> {
+  // late Cup cup;
+  late CupData ingredients;
+  bool update = false;
+  late double espressoVal = ingredients.espresso.toDouble();
+  late double milkFoamVal = ingredients.milkFoamFLoz.toDouble();
+  late double steamedMilkVal = ingredients.steamedMilkFLoz.toDouble();
+  late double hotWaterVal = ingredients.hotWaterFLoz.toDouble();
+  late double syrupOneVal = ingredients.syrupOneFLoz.toDouble();
+  late double syrupTwoVal = ingredients.syrupTwoFLoz.toDouble();
+  late double syrupThreeVal = ingredients.syrupThreeFLoz.toDouble();
+  late double syrupFourVal = ingredients.syrupFourFLoz.toDouble();
+  late double syrupFiveVal = ingredients.syrupFiveFLoz.toDouble();
+  late double syrupSixVal = ingredients.syrupSixFLoz.toDouble();
+
+  void initialize() {
+    if (widget.cup.size == 0) {
+      ingredients = widget.cup.smallCup;
+    }
+    if (widget.cup.size == 2) {
+      ingredients = widget.cup.largeCup;
+    }
+  }
+
+  void makeSmall() {
+    setState(() {
+      widget.cup.size = 0;
+      print(espressoVal);
+      test();
+      print(ingredients.espresso);
+      ingredients = widget.cup.smallCup;
+      updateIngredients();
+      update = true;
+    });
+  }
+
+  void makeLarge() {
+    setState(() {
+      widget.cup.size = 2;
+      // ingredients = cup.largeCup;
+      // // updateIngredients();
+      // print(ingredients.espresso);
+    });
+  }
+
+  void updateIngredients() {
+    espressoVal = ingredients.espresso.toDouble() / 100;
+    milkFoamVal = ingredients.milkFoamFLoz.toDouble() / 100;
+    steamedMilkVal = ingredients.steamedMilkFLoz.toDouble() / 100;
+    hotWaterVal = ingredients.hotWaterFLoz.toDouble() / 100;
+    syrupOneVal = ingredients.syrupOneFLoz.toDouble() / 100;
+    syrupTwoVal = ingredients.syrupTwoFLoz.toDouble() / 100;
+    syrupThreeVal = ingredients.syrupThreeFLoz.toDouble() / 100;
+    syrupFourVal = ingredients.syrupFourFLoz.toDouble() / 100;
+    syrupFiveVal = ingredients.syrupFiveFLoz.toDouble() / 100;
+    syrupSixVal = ingredients.syrupSixFLoz.toDouble() / 100;
+  }
+
+  void test() {
+    setState(() {
+      // ingredients.espresso = espressoVal;
+      widget.cup.smallCup.test(espressoVal);
+      ingredients.milkFoamFLoz = milkFoamVal;
+      ingredients.steamedMilkFLoz = steamedMilkVal;
+      ingredients.hotWaterFLoz = hotWaterVal;
+      ingredients.syrupOneFLoz = syrupOneVal;
+      ingredients.syrupTwoFLoz = syrupTwoVal;
+      ingredients.syrupThreeFLoz = syrupThreeVal;
+      ingredients.syrupFourFLoz = syrupFourVal;
+      ingredients.syrupFiveFLoz = syrupFiveVal;
+      ingredients.syrupSixFLoz = syrupSixVal;
+    });
+  }
+
   double sliderVal = 0.0;
   @override
   Widget build(BuildContext context) {
+    initialize();
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -54,7 +133,7 @@ class _EditCupState extends State<EditCupPage> {
         child: Center(
           child: Column(
             children: [
-              Cup(
+              CupDisplay(
                 data: widget.cup,
                 size: 2,
               ),
@@ -77,71 +156,140 @@ class _EditCupState extends State<EditCupPage> {
                 text: "Add to Cart",
                 onTap: () {},
               ),
-              MySlider(
-                min: 0,
-                max: 100,
-                divisions: 100,
-                title: "Size",
+              Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "Small",
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                    Checkbox(
+                      value: widget.cup.size == 0,
+                      onChanged: (value) {
+                        makeSmall();
+                      },
+                      shape: const CircleBorder(),
+                      checkColor: Color.fromRGBO(184, 148, 7, 1),
+                      activeColor: Color.fromRGBO(184, 148, 7, 1),
+                      side: const BorderSide(
+                        color: Colors.grey,
+                        width: 2,
+                      ),
+                    ),
+                    const Text(
+                      "Large",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
+                    ),
+                    Checkbox(
+                      value: widget.cup.size == 2,
+                      onChanged: (value) {
+                        makeLarge();
+                      },
+                      shape: const CircleBorder(),
+                      checkColor: Color.fromRGBO(184, 148, 7, 1),
+                      activeColor: Color.fromRGBO(184, 148, 7, 1),
+                      side: const BorderSide(
+                        color: Colors.grey,
+                        width: 2,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              MySlider(
+              IngredientSlider(
                 min: 0,
-                max: 100,
-                divisions: 100,
+                max: ingredients.size,
+                divisions: ingredients.size,
                 title: "Espresso",
+                startVal: ingredients.espresso,
+                sliderVal: espressoVal,
+                update: update,
               ),
-              MySlider(
+              IngredientSlider(
                 min: 0,
-                max: 100,
-                divisions: 100,
+                max: ingredients.size,
+                divisions: ingredients.size,
                 title: "Milk Foam",
+                startVal: ingredients.milkFoamFLoz,
+                sliderVal: milkFoamVal,
+                update: update,
               ),
-              MySlider(
+              IngredientSlider(
                 min: 0,
-                max: 100,
-                divisions: 100,
+                max: ingredients.size,
+                divisions: ingredients.size,
                 title: "Steamed Milk",
+                startVal: ingredients.steamedMilkFLoz,
+                sliderVal: steamedMilkVal,
+                update: update,
               ),
-              MySlider(
+              IngredientSlider(
                 min: 0,
-                max: 100,
-                divisions: 100,
+                max: ingredients.size,
+                divisions: ingredients.size,
                 title: "Hot Water",
+                startVal: ingredients.hotWaterFLoz,
+                sliderVal: hotWaterVal,
+                update: update,
               ),
-              MySlider(
+              IngredientSlider(
                 min: 0,
-                max: 100,
-                divisions: 100,
+                max: ingredients.size,
+                divisions: ingredients.size,
                 title: "Syrup 1",
+                startVal: ingredients.syrupOneFLoz,
+                sliderVal: syrupOneVal,
+                update: update,
               ),
-              MySlider(
+              IngredientSlider(
                 min: 0,
-                max: 100,
-                divisions: 100,
+                max: ingredients.size,
+                divisions: ingredients.size,
                 title: "Syrup 2",
+                startVal: ingredients.syrupTwoFLoz,
+                sliderVal: syrupTwoVal,
+                update: update,
               ),
-              MySlider(
+              IngredientSlider(
                 min: 0,
-                max: 100,
-                divisions: 100,
+                max: ingredients.size,
+                divisions: ingredients.size,
                 title: "Syrup 3",
+                startVal: ingredients.syrupThreeFLoz,
+                sliderVal: syrupThreeVal,
+                update: update,
               ),
-              MySlider(
+              IngredientSlider(
                 min: 0,
-                max: 100,
-                divisions: 100,
+                max: ingredients.size,
+                divisions: ingredients.size,
                 title: "Syrup 4",
+                startVal: ingredients.syrupFourFLoz,
+                sliderVal: syrupFiveVal,
+                update: update,
               ),
-              MySlider(
+              IngredientSlider(
                 min: 0,
-                max: 100,
-                divisions: 100,
+                max: ingredients.size,
+                divisions: ingredients.size,
                 title: "Syrup 5",
+                startVal: ingredients.syrupFiveFLoz,
+                sliderVal: syrupFiveVal,
+                update: update,
               ),
-              MySlider(
+              IngredientSlider(
                 min: 0,
-                max: 100,
-                divisions: 100,
+                max: ingredients.size,
+                divisions: ingredients.size,
                 title: "Syrup 6",
+                startVal: ingredients.syrupSixFLoz,
+                sliderVal: syrupSixVal,
+                update: update,
               ),
             ],
           ),

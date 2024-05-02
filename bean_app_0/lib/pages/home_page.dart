@@ -1,9 +1,9 @@
-import "package:bean_app_0/components/cupData.dart";
+import 'package:bean_app_0/components/cup.dart';
 import "package:bean_app_0/pages/editCupPage.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 import 'package:list_wheel_scroll_view_nls/list_wheel_scroll_view_nls.dart';
-import "../components/cup.dart";
+import '../components/cupDisplay.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -42,37 +42,35 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final standardCoffeeStack = [
-      CupData(
-        espresso: 34.0,
+      Cup(
+        espresso: 0.2,
         hotWater: 0.0,
         syrupOne: 0.0,
         syrupTwo: 0.0,
-        syrupThree: 15.0,
+        syrupThree: 0.1,
         syrupFour: 0.0,
         syrupFive: 0.0,
         syrupSix: 0.0,
-        steamedMilk: 35.0,
-        milkFoam: 45.0,
-        empty: 0.6,
+        steamedMilk: 0.3,
+        milkFoam: 0.4,
         title: "Orange Mocha Frappucino",
         description:
             "Is there anything more to life than being really really really ridiculously good looking? You know what can help you sort through this important issue? ORANGE MOCHA FRAPPUCINO!!!",
       ),
-      CupData(
-        espresso: 35.0,
-        hotWater: 24.0,
+      Cup(
+        espresso: 0.2,
+        hotWater: 0.2,
         syrupOne: 0.0,
-        syrupTwo: 25.0,
+        syrupTwo: 0.2,
         syrupThree: 0.0,
         syrupFour: 0.0,
         syrupFive: 0.0,
         syrupSix: 0.0,
         steamedMilk: 0.0,
-        milkFoam: 45.0,
-        empty: 0.6,
+        milkFoam: 0.4,
         title: "Pinkidy Dinkidy",
       ),
-      CupData(
+      Cup(
         espresso: 0.0,
         hotWater: 0.0,
         syrupOne: 0.0,
@@ -83,10 +81,9 @@ class _HomePageState extends State<HomePage> {
         syrupSix: 0.0,
         steamedMilk: 0.0,
         milkFoam: 0.0,
-        empty: 1.0,
         title: "3",
       ),
-      CupData(
+      Cup(
         espresso: 0.0,
         hotWater: 0.0,
         syrupOne: 0.0,
@@ -97,10 +94,9 @@ class _HomePageState extends State<HomePage> {
         syrupSix: 0.0,
         steamedMilk: 0.0,
         milkFoam: 0.0,
-        empty: 1.0,
         title: "4",
       ),
-      CupData(
+      Cup(
         espresso: 0.0,
         hotWater: 0.0,
         syrupOne: 0.0,
@@ -111,10 +107,9 @@ class _HomePageState extends State<HomePage> {
         syrupSix: 0.0,
         steamedMilk: 0.0,
         milkFoam: 0.0,
-        empty: 1.0,
         title: "5",
       ),
-      CupData(
+      Cup(
         espresso: 0.0,
         hotWater: 0.0,
         syrupOne: 0.0,
@@ -125,10 +120,9 @@ class _HomePageState extends State<HomePage> {
         syrupSix: 0.0,
         steamedMilk: 0.0,
         milkFoam: 0.0,
-        empty: 1.0,
         title: "6",
       ),
-      CupData(
+      Cup(
         espresso: 0.0,
         hotWater: 0.0,
         syrupOne: 0.0,
@@ -139,42 +133,39 @@ class _HomePageState extends State<HomePage> {
         syrupSix: 0.0,
         steamedMilk: 0.0,
         milkFoam: 0.0,
-        empty: 1.0,
         title: "7",
       ),
     ];
     final recentCoffeeStack = [
-      CupData(
-        espresso: 35.0,
-        hotWater: 24.0,
+      Cup(
+        espresso: 0.2,
+        hotWater: 0.2,
         syrupOne: 0.0,
-        syrupTwo: 25.0,
+        syrupTwo: 0.2,
         syrupThree: 0.0,
         syrupFour: 0.0,
         syrupFive: 0.0,
         syrupSix: 0.0,
         steamedMilk: 0.0,
-        milkFoam: 45.0,
-        empty: 0.6,
+        milkFoam: 0.4,
         title: "Pinkidy Dinkidy",
       ),
-      CupData(
-        espresso: 34.0,
+      Cup(
+        espresso: 0.2,
         hotWater: 0.0,
         syrupOne: 0.0,
         syrupTwo: 0.0,
-        syrupThree: 15.0,
+        syrupThree: 0.1,
         syrupFour: 0.0,
         syrupFive: 0.0,
         syrupSix: 0.0,
-        steamedMilk: 35.0,
-        milkFoam: 45.0,
-        empty: 0.6,
+        steamedMilk: 0.3,
+        milkFoam: 0.4,
         title: "Orange Mocha Frappucino",
         description:
             "Is there anything more to life than being really really really ridiculously good looking? You know what can help you sort through this important issue? ORANGE MOCHA FRAPPUCINO!!!",
       ),
-      CupData(
+      Cup(
         espresso: 0.0,
         hotWater: 0.0,
         syrupOne: 0.0,
@@ -185,10 +176,9 @@ class _HomePageState extends State<HomePage> {
         syrupSix: 0.0,
         steamedMilk: 0.0,
         milkFoam: 0.0,
-        empty: 1.0,
         title: "3",
       ),
-      CupData(
+      Cup(
         espresso: 0.0,
         hotWater: 0.0,
         syrupOne: 0.0,
@@ -199,10 +189,9 @@ class _HomePageState extends State<HomePage> {
         syrupSix: 0.0,
         steamedMilk: 0.0,
         milkFoam: 0.0,
-        empty: 1.0,
         title: "4",
       ),
-      CupData(
+      Cup(
         espresso: 0.0,
         hotWater: 0.0,
         syrupOne: 0.0,
@@ -213,10 +202,9 @@ class _HomePageState extends State<HomePage> {
         syrupSix: 0.0,
         steamedMilk: 0.0,
         milkFoam: 0.0,
-        empty: 1.0,
         title: "5",
       ),
-      CupData(
+      Cup(
         espresso: 0.0,
         hotWater: 0.0,
         syrupOne: 0.0,
@@ -227,10 +215,9 @@ class _HomePageState extends State<HomePage> {
         syrupSix: 0.0,
         steamedMilk: 0.0,
         milkFoam: 0.0,
-        empty: 1.0,
         title: "6",
       ),
-      CupData(
+      Cup(
         espresso: 0.0,
         hotWater: 0.0,
         syrupOne: 0.0,
@@ -241,106 +228,103 @@ class _HomePageState extends State<HomePage> {
         syrupSix: 0.0,
         steamedMilk: 0.0,
         milkFoam: 0.0,
-        empty: 1.0,
         title: "7",
       ),
     ];
     final favoritesCoffeeStack = [
-      CupData(
-        espresso: 34.0,
+      Cup(
+        espresso: 0.2,
         hotWater: 0.0,
         syrupOne: 0.0,
         syrupTwo: 0.0,
-        syrupThree: 15.0,
+        syrupThree: 0.1,
         syrupFour: 0.0,
         syrupFive: 0.0,
         syrupSix: 0.0,
-        steamedMilk: 35.0,
-        milkFoam: 45.0,
-        empty: 0.6,
+        steamedMilk: 0.3,
+        milkFoam: 0.4,
         title: "Orange Mocha Frappucino",
         description:
             "Is there anything more to life than being really really really ridiculously good looking? You know what can help you sort through this important issue? ORANGE MOCHA FRAPPUCINO!!!",
       ),
-      CupData(
-        espresso: 35.0,
-        hotWater: 24.0,
+      Cup(
+        espresso: 0.2,
+        hotWater: 0.2,
         syrupOne: 0.0,
-        syrupTwo: 25.0,
+        syrupTwo: 0.2,
         syrupThree: 0.0,
         syrupFour: 0.0,
         syrupFive: 0.0,
         syrupSix: 0.0,
         steamedMilk: 0.0,
-        milkFoam: 45.0,
-        empty: 0.6,
+        milkFoam: 0.4,
         title: "Pinkidy Dinkidy",
       ),
-      CupData(
-          espresso: 0.0,
-          hotWater: 0.0,
-          syrupOne: 0.0,
-          syrupTwo: 0.0,
-          syrupThree: 0.0,
-          syrupFour: 0.0,
-          syrupFive: 0.0,
-          syrupSix: 0.0,
-          steamedMilk: 0.0,
-          milkFoam: 0.0,
-          empty: 1.0,
-          title: "3"),
-      CupData(
-          espresso: 0.0,
-          hotWater: 0.0,
-          syrupOne: 0.0,
-          syrupTwo: 0.0,
-          syrupThree: 0.0,
-          syrupFour: 0.0,
-          syrupFive: 0.0,
-          syrupSix: 0.0,
-          steamedMilk: 0.0,
-          milkFoam: 0.0,
-          empty: 1.0,
-          title: "4"),
-      CupData(
-          espresso: 0.0,
-          hotWater: 0.0,
-          syrupOne: 0.0,
-          syrupTwo: 0.0,
-          syrupThree: 0.0,
-          syrupFour: 0.0,
-          syrupFive: 0.0,
-          syrupSix: 0.0,
-          steamedMilk: 0.0,
-          milkFoam: 0.0,
-          empty: 1.0,
-          title: "5"),
-      CupData(
-          espresso: 0.0,
-          hotWater: 0.0,
-          syrupOne: 0.0,
-          syrupTwo: 0.0,
-          syrupThree: 0.0,
-          syrupFour: 0.0,
-          syrupFive: 0.0,
-          syrupSix: 0.0,
-          steamedMilk: 0.0,
-          milkFoam: 0.0,
-          empty: 1.0,
-          title: "6"),
-      CupData(
-          espresso: 0.0,
-          hotWater: 0.0,
-          syrupOne: 0.0,
-          syrupTwo: 0.0,
-          syrupThree: 0.0,
-          syrupFour: 0.0,
-          syrupFive: 0.0,
-          syrupSix: 0.0,
-          steamedMilk: 0.0,
-          milkFoam: 0.0,
-          empty: 1.0,
-          title: "7")
+      Cup(
+        espresso: 0.0,
+        hotWater: 0.0,
+        syrupOne: 0.0,
+        syrupTwo: 0.0,
+        syrupThree: 0.0,
+        syrupFour: 0.0,
+        syrupFive: 0.0,
+        syrupSix: 0.0,
+        steamedMilk: 0.0,
+        milkFoam: 0.0,
+        title: "3",
+      ),
+      Cup(
+        espresso: 0.0,
+        hotWater: 0.0,
+        syrupOne: 0.0,
+        syrupTwo: 0.0,
+        syrupThree: 0.0,
+        syrupFour: 0.0,
+        syrupFive: 0.0,
+        syrupSix: 0.0,
+        steamedMilk: 0.0,
+        milkFoam: 0.0,
+        title: "4",
+      ),
+      Cup(
+        espresso: 0.0,
+        hotWater: 0.0,
+        syrupOne: 0.0,
+        syrupTwo: 0.0,
+        syrupThree: 0.0,
+        syrupFour: 0.0,
+        syrupFive: 0.0,
+        syrupSix: 0.0,
+        steamedMilk: 0.0,
+        milkFoam: 0.0,
+        title: "5",
+      ),
+      Cup(
+        espresso: 0.0,
+        hotWater: 0.0,
+        syrupOne: 0.0,
+        syrupTwo: 0.0,
+        syrupThree: 0.0,
+        syrupFour: 0.0,
+        syrupFive: 0.0,
+        syrupSix: 0.0,
+        steamedMilk: 0.0,
+        milkFoam: 0.0,
+        title: "6",
+      ),
+      Cup(
+        espresso: 0.0,
+        hotWater: 0.0,
+        syrupOne: 0.0,
+        syrupTwo: 0.0,
+        syrupThree: 0.0,
+        syrupFour: 0.0,
+        syrupFive: 0.0,
+        syrupSix: 0.0,
+        steamedMilk: 0.0,
+        milkFoam: 0.0,
+        title: "7",
+      )
     ];
     return Scaffold(
       backgroundColor: Colors.black,
@@ -412,12 +396,12 @@ class _HomePageState extends State<HomePage> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => EditCupPage(
-                                            cup:
+                                            originalCup:
                                                 favoritesCoffeeStack[index % 7],
                                           )),
                                 );
                               },
-                              child: Cup(
+                              child: CupDisplay(
                                   data: standardCoffeeStack[index % 7],
                                   size: 1));
                         })),
@@ -466,12 +450,12 @@ class _HomePageState extends State<HomePage> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => EditCupPage(
-                                                cup: recentCoffeeStack[
+                                                originalCup: recentCoffeeStack[
                                                     index % 7],
                                               )),
                                     );
                                   },
-                                  child: Cup(
+                                  child: CupDisplay(
                                     data: recentCoffeeStack[index % 7],
                                     size: 1,
                                   ));
@@ -521,12 +505,13 @@ class _HomePageState extends State<HomePage> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) => EditCupPage(
-                                                    cup: favoritesCoffeeStack[
-                                                        index % 7],
+                                                    originalCup:
+                                                        favoritesCoffeeStack[
+                                                            index % 7],
                                                   )),
                                         );
                                       },
-                                      child: Cup(
+                                      child: CupDisplay(
                                         data: favoritesCoffeeStack[index % 7],
                                         size: 1,
                                       ));
@@ -574,12 +559,13 @@ class _HomePageState extends State<HomePage> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) => EditCupPage(
-                                                  cup: standardCoffeeStack[
-                                                      index % 7],
+                                                  originalCup:
+                                                      standardCoffeeStack[
+                                                          index % 7],
                                                 )),
                                       );
                                     },
-                                    child: Cup(
+                                    child: CupDisplay(
                                         data: standardCoffeeStack[index % 7],
                                         size: 1));
                               },
@@ -631,12 +617,13 @@ class _HomePageState extends State<HomePage> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) => EditCupPage(
-                                                    cup: recentCoffeeStack[
-                                                        index % 7],
+                                                    originalCup:
+                                                        recentCoffeeStack[
+                                                            index % 7],
                                                   )),
                                         );
                                       },
-                                      child: Cup(
+                                      child: CupDisplay(
                                           data: recentCoffeeStack[index % 7],
                                           size: 1));
                                 },
@@ -689,11 +676,12 @@ class _HomePageState extends State<HomePage> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) => EditCupPage(
-                                                  cup: favoritesCoffeeStack[
-                                                      index % 7])),
+                                                  originalCup:
+                                                      favoritesCoffeeStack[
+                                                          index % 7])),
                                         );
                                       },
-                                      child: Cup(
+                                      child: CupDisplay(
                                           data: favoritesCoffeeStack[index % 7],
                                           size: 1));
                                 },
