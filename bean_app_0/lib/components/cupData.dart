@@ -1,4 +1,5 @@
 class CupData {
+  double price = 0;
   double espresso;
   double hotWaterFLoz;
   double syrupOneFLoz;
@@ -10,6 +11,7 @@ class CupData {
   double steamedMilkFLoz;
   double milkFoamFLoz;
   double size;
+  double empty;
 
   CupData({
     required this.espresso,
@@ -23,7 +25,25 @@ class CupData {
     required this.steamedMilkFLoz,
     required this.milkFoamFLoz,
     required this.size,
-  });
+    required this.empty,
+  }) {
+    updatePrice();
+  }
+
+  void updatePrice() {
+    this.price = ((this.espresso * 40) +
+            (this.hotWaterFLoz * 4) +
+            (this.syrupOneFLoz * 80) +
+            (this.syrupTwoFLoz * 80) +
+            (this.syrupThreeFLoz * 80) +
+            (this.syrupFourFLoz * 80) +
+            (this.syrupFiveFLoz * 80) +
+            (this.syrupSixFLoz * 80) +
+            (this.steamedMilkFLoz * 24) +
+            (this.milkFoamFLoz * 20) +
+            25)
+        .roundToDouble();
+  }
 
   CupData copy() {
     return CupData(
@@ -38,12 +58,7 @@ class CupData {
       steamedMilkFLoz: steamedMilkFLoz,
       milkFoamFLoz: milkFoamFLoz,
       size: size,
+      empty: empty,
     );
-  }
-
-  void test(double val) {
-    espresso = val;
-    print(val);
-    print(espresso);
   }
 }

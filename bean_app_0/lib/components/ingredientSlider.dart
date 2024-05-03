@@ -1,23 +1,28 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class IngredientSlider extends StatefulWidget {
   final String title;
+  final String units;
   final double min;
   final double max;
   final double divisions;
   final double startVal;
-  double sliderVal;
   bool update;
+  Function(double)? onChanged;
+  // final double limit;
 
   IngredientSlider({
     Key? key,
     required this.title,
+    required this.units,
     required this.min,
     required this.max,
     required this.startVal,
-    required this.sliderVal,
     required this.update,
     required this.divisions,
+    required this.onChanged,
+    // required this.limit,
   }) : super(key: key);
 
   @override
@@ -26,19 +31,33 @@ class IngredientSlider extends StatefulWidget {
 
 class _MySliderState extends State<IngredientSlider> {
   late TextEditingController textController;
+  late double sliderVal;
 
   @override
   void initState() {
     super.initState();
-    widget.sliderVal = widget.startVal;
-    textController = TextEditingController(text: widget.sliderVal.toString());
+    setState(() {
+      sliderVal = widget.startVal;
+    });
+    textController = TextEditingController(text: sliderVal.toString());
   }
 
   @override
   Widget build(BuildContext context) {
     if (widget.update) {
       widget.update = false;
-      textController = TextEditingController(text: widget.sliderVal.toString());
+      sliderVal = widget.startVal;
+      textController = TextEditingController(text: sliderVal.toString());
+    }
+    Color sliderFill = Color.fromRGBO(184, 148, 7, 1);
+    Color sliderEmpty = Colors.grey;
+    if (sliderVal == 0) {
+      sliderFill = Color.fromRGBO(112, 91, 5, 1);
+      sliderEmpty = Colors.grey[800]!;
+    }
+    int divisions = (widget.divisions * 100).toInt();
+    if (divisions == 0) {
+      divisions = 1;
     }
     return Column(
       children: [
@@ -56,30 +75,32 @@ class _MySliderState extends State<IngredientSlider> {
               Expanded(
                 flex: 9,
                 child: Slider(
-                  activeColor: const Color.fromRGBO(184, 148, 7, 1),
-                  inactiveColor: Colors.grey,
-                  thumbColor: const Color.fromRGBO(184, 148, 7, 1),
-                  value: widget.sliderVal * 100,
+                  activeColor: sliderFill,
+                  inactiveColor: sliderEmpty,
+                  thumbColor: sliderFill,
+                  value: sliderVal * 100,
                   min: widget.min * 100,
                   max: widget.max * 100,
-                  divisions: (widget.divisions * 100).toInt(),
-                  // label: '$sliderVal',
+                  divisions: divisions,
                   onChanged: (value) {
-                    setState(() {
-                      widget.sliderVal = (value.roundToDouble()) / 100;
-                      textController = TextEditingController(
-                          text: widget.sliderVal.toString());
-                    });
+                    if (value < widget.max * 100) {
+                      widget.onChanged!((value.roundToDouble()) / 100);
+                      setState(() {
+                        sliderVal = (value.roundToDouble()) / 100;
+                        textController =
+                            TextEditingController(text: sliderVal.toString());
+                      });
+                    } else {
+                      widget.onChanged!(widget.max);
+                      setState(() {
+                        sliderVal = widget.max;
+                        textController =
+                            TextEditingController(text: sliderVal.toString());
+                      });
+                    }
                   },
                 ),
               ),
-              // Text(
-              //   sliderVal.toString(),
-              //   style: TextStyle(
-              //     color: Colors.white,
-              //     fontSize: 16,
-              //   ),
-              // )
               Expanded(
                 flex: 1,
                 child: TextField(
@@ -98,20 +119,32 @@ class _MySliderState extends State<IngredientSlider> {
                     setState(() {
                       double temp = double.tryParse(value) ?? widget.startVal;
                       if (temp > widget.max) {
-                        widget.sliderVal = widget.max;
-                        textController = TextEditingController(
-                            text: widget.sliderVal.toString());
+                        sliderVal = widget.max;
+                        widget.onChanged!(sliderVal);
+                        textController =
+                            TextEditingController(text: sliderVal.toString());
                       } else if (temp < widget.min) {
-                        widget.sliderVal = widget.min;
-                        textController = TextEditingController(
-                            text: widget.sliderVal.toString());
+                        sliderVal = widget.min;
+                        widget.onChanged!(sliderVal);
+                        textController =
+                            TextEditingController(text: sliderVal.toString());
                       } else {
-                        widget.sliderVal = temp;
+                        sliderVal = temp;
+                        widget.onChanged!(sliderVal);
                       }
                     });
                   },
                 ),
-              )
+              ),
+              Expanded(
+                child: Text(
+                  widget.units,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
             ],
           ),
         ),

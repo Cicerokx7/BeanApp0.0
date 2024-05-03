@@ -1,5 +1,3 @@
-// import "dart:ffi";
-
 import 'package:bean_app_0/components/cup.dart';
 import 'package:bean_app_0/components/cupData.dart';
 import 'package:bean_app_0/components/ingredientSlider.dart';
@@ -8,89 +6,40 @@ import "package:flutter/material.dart";
 import '../components/cupDisplay.dart';
 import "../components/login_button_A.dart";
 
+// ignore: must_be_immutable
 class EditCupPage extends StatefulWidget {
   Cup originalCup;
-  Cup cup;
   EditCupPage({
-    Key? key,
+    super.key,
     required this.originalCup,
-    // this.cup = originalCup.copy()
-  })
+  });
   @override
   State<EditCupPage> createState() => _EditCupState();
 }
 
 class _EditCupState extends State<EditCupPage> {
-  // late Cup cup;
-  late CupData ingredients;
+  late Cup cup = widget.originalCup.copy();
+  late CupData ingredients = cup.largeCup;
   bool update = false;
-  late double espressoVal = ingredients.espresso.toDouble();
-  late double milkFoamVal = ingredients.milkFoamFLoz.toDouble();
-  late double steamedMilkVal = ingredients.steamedMilkFLoz.toDouble();
-  late double hotWaterVal = ingredients.hotWaterFLoz.toDouble();
-  late double syrupOneVal = ingredients.syrupOneFLoz.toDouble();
-  late double syrupTwoVal = ingredients.syrupTwoFLoz.toDouble();
-  late double syrupThreeVal = ingredients.syrupThreeFLoz.toDouble();
-  late double syrupFourVal = ingredients.syrupFourFLoz.toDouble();
-  late double syrupFiveVal = ingredients.syrupFiveFLoz.toDouble();
-  late double syrupSixVal = ingredients.syrupSixFLoz.toDouble();
 
   void initialize() {
-    if (widget.cup.size == 0) {
-      ingredients = widget.cup.smallCup;
+    if (cup.size == 0) {
+      ingredients = cup.smallCup;
     }
-    if (widget.cup.size == 2) {
-      ingredients = widget.cup.largeCup;
+    if (cup.size == 2) {
+      ingredients = cup.largeCup;
     }
   }
 
-  void makeSmall() {
+  void changeSize() {
     setState(() {
-      widget.cup.size = 0;
-      print(espressoVal);
-      test();
-      print(ingredients.espresso);
-      ingredients = widget.cup.smallCup;
-      updateIngredients();
-      update = true;
-    });
-  }
-
-  void makeLarge() {
-    setState(() {
-      widget.cup.size = 2;
-      // ingredients = cup.largeCup;
-      // // updateIngredients();
-      // print(ingredients.espresso);
-    });
-  }
-
-  void updateIngredients() {
-    espressoVal = ingredients.espresso.toDouble() / 100;
-    milkFoamVal = ingredients.milkFoamFLoz.toDouble() / 100;
-    steamedMilkVal = ingredients.steamedMilkFLoz.toDouble() / 100;
-    hotWaterVal = ingredients.hotWaterFLoz.toDouble() / 100;
-    syrupOneVal = ingredients.syrupOneFLoz.toDouble() / 100;
-    syrupTwoVal = ingredients.syrupTwoFLoz.toDouble() / 100;
-    syrupThreeVal = ingredients.syrupThreeFLoz.toDouble() / 100;
-    syrupFourVal = ingredients.syrupFourFLoz.toDouble() / 100;
-    syrupFiveVal = ingredients.syrupFiveFLoz.toDouble() / 100;
-    syrupSixVal = ingredients.syrupSixFLoz.toDouble() / 100;
-  }
-
-  void test() {
-    setState(() {
-      // ingredients.espresso = espressoVal;
-      widget.cup.smallCup.test(espressoVal);
-      ingredients.milkFoamFLoz = milkFoamVal;
-      ingredients.steamedMilkFLoz = steamedMilkVal;
-      ingredients.hotWaterFLoz = hotWaterVal;
-      ingredients.syrupOneFLoz = syrupOneVal;
-      ingredients.syrupTwoFLoz = syrupTwoVal;
-      ingredients.syrupThreeFLoz = syrupThreeVal;
-      ingredients.syrupFourFLoz = syrupFourVal;
-      ingredients.syrupFiveFLoz = syrupFiveVal;
-      ingredients.syrupSixFLoz = syrupSixVal;
+      if (cup.size == 0) {
+        cup.size = 2;
+        update = true;
+      } else if (cup.size == 2) {
+        cup.size = 0;
+        update = true;
+      }
     });
   }
 
@@ -123,7 +72,7 @@ class _EditCupState extends State<EditCupPage> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => HomePage()),
+                MaterialPageRoute(builder: (context) => const HomePage()),
               );
             },
           );
@@ -134,22 +83,28 @@ class _EditCupState extends State<EditCupPage> {
           child: Column(
             children: [
               CupDisplay(
-                data: widget.cup,
+                data: cup,
                 size: 2,
               ),
               Visibility(
-                visible: widget.cup.description != null,
+                visible: cup.description != null,
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Text(
-                    widget.cup.description != null
-                        ? widget.cup.description!
-                        : '',
-                    style: TextStyle(
+                    cup.description != null ? cup.description! : '',
+                    style: const TextStyle(
                       color: Colors.white,
                     ),
                     textAlign: TextAlign.center,
                   ),
+                ),
+              ),
+              // Row(children: [],),
+              Text(
+                "\$${ingredients.price / 100}",
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 26,
                 ),
               ),
               LoginButtonA(
@@ -166,13 +121,13 @@ class _EditCupState extends State<EditCupPage> {
                       style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
                     Checkbox(
-                      value: widget.cup.size == 0,
+                      value: cup.size == 0,
                       onChanged: (value) {
-                        makeSmall();
+                        changeSize();
                       },
                       shape: const CircleBorder(),
-                      checkColor: Color.fromRGBO(184, 148, 7, 1),
-                      activeColor: Color.fromRGBO(184, 148, 7, 1),
+                      checkColor: const Color.fromRGBO(184, 148, 7, 1),
+                      activeColor: const Color.fromRGBO(184, 148, 7, 1),
                       side: const BorderSide(
                         color: Colors.grey,
                         width: 2,
@@ -186,13 +141,13 @@ class _EditCupState extends State<EditCupPage> {
                       ),
                     ),
                     Checkbox(
-                      value: widget.cup.size == 2,
+                      value: cup.size == 2,
                       onChanged: (value) {
-                        makeLarge();
+                        changeSize();
                       },
                       shape: const CircleBorder(),
-                      checkColor: Color.fromRGBO(184, 148, 7, 1),
-                      activeColor: Color.fromRGBO(184, 148, 7, 1),
+                      checkColor: const Color.fromRGBO(184, 148, 7, 1),
+                      activeColor: const Color.fromRGBO(184, 148, 7, 1),
                       side: const BorderSide(
                         color: Colors.grey,
                         width: 2,
@@ -202,93 +157,224 @@ class _EditCupState extends State<EditCupPage> {
                 ),
               ),
               IngredientSlider(
+                min: 60,
+                max: 100,
+                divisions: 40,
+                title: "Temperature",
+                units: " F",
+                startVal: cup.heat,
+                onChanged: (value) {
+                  setState(() {
+                    cup.heat = value;
+                    // build(context);
+                  });
+                },
+                update: update,
+              ),
+              IngredientSlider(
                 min: 0,
-                max: ingredients.size,
-                divisions: ingredients.size,
+                max: ingredients.empty + ingredients.espresso,
+                divisions: ingredients.empty + ingredients.espresso,
                 title: "Espresso",
+                units: " fL oz",
                 startVal: ingredients.espresso,
-                sliderVal: espressoVal,
+                onChanged: (value) {
+                  setState(() {
+                    ingredients.empty =
+                        ingredients.empty + ingredients.espresso - value;
+                    if (ingredients.empty < 0) {
+                      ingredients.empty = 0;
+                    }
+                    cup.updateEspresso(
+                        value, ingredients.size, ingredients.empty);
+                    // build(context);
+                  });
+                },
                 update: update,
+                // limit: 5,
               ),
               IngredientSlider(
                 min: 0,
-                max: ingredients.size,
-                divisions: ingredients.size,
+                max: ingredients.milkFoamFLoz + ingredients.empty,
+                divisions: ingredients.milkFoamFLoz + ingredients.empty,
                 title: "Milk Foam",
+                units: " fL oz",
                 startVal: ingredients.milkFoamFLoz,
-                sliderVal: milkFoamVal,
+                // sliderVal: milkFoamVal,
+                onChanged: (value) {
+                  setState(() {
+                    ingredients.empty =
+                        ingredients.empty + ingredients.milkFoamFLoz - value;
+                    if (ingredients.empty < 0) {
+                      ingredients.empty = 0;
+                    }
+                    ingredients.milkFoamFLoz = value;
+                    cup.updateMilkFoam(ingredients.milkFoamFLoz,
+                        ingredients.size, ingredients.empty);
+                  });
+                },
                 update: update,
               ),
               IngredientSlider(
                 min: 0,
-                max: ingredients.size,
-                divisions: ingredients.size,
+                max: ingredients.steamedMilkFLoz + ingredients.empty,
+                divisions: ingredients.steamedMilkFLoz + ingredients.empty,
                 title: "Steamed Milk",
+                units: " fL oz",
                 startVal: ingredients.steamedMilkFLoz,
-                sliderVal: steamedMilkVal,
+                onChanged: (value) {
+                  setState(() {
+                    ingredients.empty =
+                        ingredients.empty + ingredients.steamedMilkFLoz - value;
+                    if (ingredients.empty < 0) {
+                      ingredients.empty = 0;
+                    }
+                    ingredients.steamedMilkFLoz = value;
+                    cup.updateSteamedMilk(ingredients.steamedMilkFLoz,
+                        ingredients.size, ingredients.empty);
+                    // build(context);
+                  });
+                },
                 update: update,
               ),
               IngredientSlider(
                 min: 0,
-                max: ingredients.size,
-                divisions: ingredients.size,
+                max: ingredients.hotWaterFLoz + ingredients.empty,
+                divisions: ingredients.hotWaterFLoz + ingredients.empty,
                 title: "Hot Water",
+                units: " fL oz",
                 startVal: ingredients.hotWaterFLoz,
-                sliderVal: hotWaterVal,
+                onChanged: (value) {
+                  setState(() {
+                    ingredients.empty =
+                        ingredients.empty + ingredients.hotWaterFLoz - value;
+                    if (ingredients.empty < 0) {
+                      ingredients.empty = 0;
+                    }
+                    cup.updateHotWater(
+                        value, ingredients.size, ingredients.empty);
+                  });
+                },
                 update: update,
               ),
               IngredientSlider(
                 min: 0,
-                max: ingredients.size,
-                divisions: ingredients.size,
+                max: ingredients.syrupOneFLoz + ingredients.empty,
+                divisions: ingredients.syrupOneFLoz + ingredients.empty,
                 title: "Syrup 1",
+                units: " fL oz",
                 startVal: ingredients.syrupOneFLoz,
-                sliderVal: syrupOneVal,
+                onChanged: (value) {
+                  setState(() {
+                    ingredients.empty =
+                        ingredients.empty + ingredients.syrupOneFLoz - value;
+                    if (ingredients.empty < 0) {
+                      ingredients.empty = 0;
+                    }
+                    cup.updateSyrupOne(
+                        value, ingredients.size, ingredients.empty);
+                  });
+                },
                 update: update,
               ),
               IngredientSlider(
                 min: 0,
-                max: ingredients.size,
-                divisions: ingredients.size,
+                max: ingredients.syrupTwoFLoz + ingredients.empty,
+                divisions: ingredients.syrupTwoFLoz + ingredients.empty,
                 title: "Syrup 2",
+                units: " fL oz",
                 startVal: ingredients.syrupTwoFLoz,
-                sliderVal: syrupTwoVal,
+                onChanged: (value) {
+                  setState(() {
+                    ingredients.empty =
+                        ingredients.empty + ingredients.syrupTwoFLoz - value;
+                    if (ingredients.empty < 0) {
+                      ingredients.empty = 0;
+                    }
+                    cup.updateSyrupTwo(
+                        value, ingredients.size, ingredients.empty);
+                  });
+                },
                 update: update,
               ),
               IngredientSlider(
                 min: 0,
-                max: ingredients.size,
-                divisions: ingredients.size,
+                max: ingredients.syrupThreeFLoz + ingredients.empty,
+                divisions: ingredients.syrupThreeFLoz + ingredients.empty,
                 title: "Syrup 3",
+                units: " fL oz",
                 startVal: ingredients.syrupThreeFLoz,
-                sliderVal: syrupThreeVal,
+                onChanged: (value) {
+                  setState(() {
+                    ingredients.empty =
+                        ingredients.empty + ingredients.syrupThreeFLoz - value;
+                    if (ingredients.empty < 0) {
+                      ingredients.empty = 0;
+                    }
+                    cup.updateSyrupThree(
+                        value, ingredients.size, ingredients.empty);
+                  });
+                },
                 update: update,
               ),
               IngredientSlider(
                 min: 0,
-                max: ingredients.size,
-                divisions: ingredients.size,
+                max: ingredients.syrupFourFLoz + ingredients.empty,
+                divisions: ingredients.syrupFourFLoz + ingredients.empty,
                 title: "Syrup 4",
+                units: " fL oz",
                 startVal: ingredients.syrupFourFLoz,
-                sliderVal: syrupFiveVal,
+                onChanged: (value) {
+                  setState(() {
+                    ingredients.empty =
+                        ingredients.empty + ingredients.syrupFourFLoz - value;
+                    if (ingredients.empty < 0) {
+                      ingredients.empty = 0;
+                    }
+                    cup.updateSyrupFour(
+                        value, ingredients.size, ingredients.empty);
+                  });
+                },
                 update: update,
               ),
               IngredientSlider(
                 min: 0,
-                max: ingredients.size,
-                divisions: ingredients.size,
+                max: ingredients.syrupFiveFLoz + ingredients.empty,
+                divisions: ingredients.syrupFiveFLoz + ingredients.empty,
                 title: "Syrup 5",
+                units: " fL oz",
                 startVal: ingredients.syrupFiveFLoz,
-                sliderVal: syrupFiveVal,
+                onChanged: (value) {
+                  setState(() {
+                    ingredients.empty =
+                        ingredients.empty + ingredients.syrupFiveFLoz - value;
+                    if (ingredients.empty < 0) {
+                      ingredients.empty = 0;
+                    }
+                    cup.updateSyrupFive(
+                        value, ingredients.size, ingredients.empty);
+                  });
+                },
                 update: update,
               ),
               IngredientSlider(
                 min: 0,
-                max: ingredients.size,
-                divisions: ingredients.size,
+                max: ingredients.syrupSixFLoz + ingredients.empty,
+                divisions: ingredients.syrupSixFLoz + ingredients.empty,
                 title: "Syrup 6",
+                units: " fL oz",
                 startVal: ingredients.syrupSixFLoz,
-                sliderVal: syrupSixVal,
+                onChanged: (value) {
+                  setState(() {
+                    ingredients.empty =
+                        ingredients.empty + ingredients.syrupSixFLoz - value;
+                    if (ingredients.empty < 0) {
+                      ingredients.empty = 0;
+                    }
+                    cup.updateEspresso(
+                        value, ingredients.size, ingredients.empty);
+                  });
+                },
                 update: update,
               ),
             ],
