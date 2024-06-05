@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class IngredientSlider extends StatefulWidget {
+class IngredientSliderDouble extends StatefulWidget {
   final String title;
   final String units;
   final double min;
@@ -12,7 +12,7 @@ class IngredientSlider extends StatefulWidget {
   Function(double)? onChanged;
   // final double limit;
 
-  IngredientSlider({
+  IngredientSliderDouble({
     Key? key,
     required this.title,
     required this.units,
@@ -26,10 +26,10 @@ class IngredientSlider extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _IngredientSliderState createState() => _IngredientSliderState();
+  _IngredientSliderDoubleState createState() => _IngredientSliderDoubleState();
 }
 
-class _IngredientSliderState extends State<IngredientSlider> {
+class _IngredientSliderDoubleState extends State<IngredientSliderDouble> {
   late TextEditingController textController;
   late double sliderVal;
 
@@ -78,15 +78,15 @@ class _IngredientSliderState extends State<IngredientSlider> {
                   activeColor: sliderFill,
                   inactiveColor: sliderEmpty,
                   thumbColor: sliderFill,
-                  value: sliderVal,
-                  min: widget.min,
-                  max: widget.max,
+                  value: sliderVal * 100,
+                  min: widget.min * 100,
+                  max: widget.max * 100,
                   divisions: divisions,
                   onChanged: (value) {
-                    if (value < widget.max) {
-                      widget.onChanged!(value.roundToDouble());
+                    if (value < widget.max * 100) {
+                      widget.onChanged!((value.roundToDouble()) / 100);
                       setState(() {
-                        sliderVal = value.roundToDouble();
+                        sliderVal = (value.roundToDouble()) / 100;
                         textController =
                             TextEditingController(text: sliderVal.toString());
                       });

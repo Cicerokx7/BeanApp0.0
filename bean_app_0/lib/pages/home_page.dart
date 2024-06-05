@@ -43,6 +43,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final standardCoffeeStack = [
       Cup(
+        custom: false,
         heat: 80,
         espresso: 0.2,
         hotWater: 0.0,
@@ -60,6 +61,7 @@ class _HomePageState extends State<HomePage> {
             "Is there anything more to life than being really really really ridiculously good looking? You know what can help you sort through this important issue? ORANGE MOCHA FRAPPUCINO!!!",
       ),
       Cup(
+        custom: false,
         heat: 80,
         espresso: 0.2,
         hotWater: 0.2,
@@ -75,6 +77,7 @@ class _HomePageState extends State<HomePage> {
         title: "Pinkidy Dinkidy",
       ),
       Cup(
+        custom: false,
         heat: 80,
         espresso: 0.0,
         hotWater: 0.0,
@@ -90,6 +93,7 @@ class _HomePageState extends State<HomePage> {
         title: "3",
       ),
       Cup(
+        custom: false,
         heat: 80,
         espresso: 0.0,
         hotWater: 0.0,
@@ -105,6 +109,7 @@ class _HomePageState extends State<HomePage> {
         title: "4",
       ),
       Cup(
+        custom: false,
         heat: 80,
         espresso: 0.0,
         hotWater: 0.0,
@@ -120,6 +125,7 @@ class _HomePageState extends State<HomePage> {
         title: "5",
       ),
       Cup(
+        custom: false,
         heat: 80,
         espresso: 0.0,
         hotWater: 0.0,
@@ -135,6 +141,7 @@ class _HomePageState extends State<HomePage> {
         title: "6",
       ),
       Cup(
+        custom: false,
         heat: 80,
         espresso: 0.0,
         hotWater: 0.0,
@@ -152,6 +159,7 @@ class _HomePageState extends State<HomePage> {
     ];
     final recentCoffeeStack = [
       Cup(
+        custom: false,
         heat: 80,
         espresso: 0.2,
         hotWater: 0.2,
@@ -167,6 +175,7 @@ class _HomePageState extends State<HomePage> {
         title: "Pinkidy Dinkidy",
       ),
       Cup(
+        custom: true,
         heat: 80,
         espresso: 0.2,
         hotWater: 0.0,
@@ -184,6 +193,7 @@ class _HomePageState extends State<HomePage> {
             "Is there anything more to life than being really really really ridiculously good looking? You know what can help you sort through this important issue? ORANGE MOCHA FRAPPUCINO!!!",
       ),
       Cup(
+        custom: false,
         heat: 80,
         espresso: 0.0,
         hotWater: 0.0,
@@ -199,6 +209,7 @@ class _HomePageState extends State<HomePage> {
         title: "3",
       ),
       Cup(
+        custom: false,
         heat: 80,
         espresso: 0.0,
         hotWater: 0.0,
@@ -214,6 +225,7 @@ class _HomePageState extends State<HomePage> {
         title: "4",
       ),
       Cup(
+        custom: false,
         heat: 80,
         espresso: 0.0,
         hotWater: 0.0,
@@ -229,6 +241,7 @@ class _HomePageState extends State<HomePage> {
         title: "5",
       ),
       Cup(
+        custom: false,
         heat: 80,
         espresso: 0.0,
         hotWater: 0.0,
@@ -244,6 +257,7 @@ class _HomePageState extends State<HomePage> {
         title: "6",
       ),
       Cup(
+        custom: false,
         heat: 80,
         espresso: 0.0,
         hotWater: 0.0,
@@ -261,6 +275,7 @@ class _HomePageState extends State<HomePage> {
     ];
     final favoritesCoffeeStack = [
       Cup(
+        custom: true,
         heat: 80,
         espresso: 0.2,
         hotWater: 0.0,
@@ -278,6 +293,7 @@ class _HomePageState extends State<HomePage> {
             "Is there anything more to life than being really really really ridiculously good looking? You know what can help you sort through this important issue? ORANGE MOCHA FRAPPUCINO!!!",
       ),
       Cup(
+        custom: true,
         heat: 80,
         espresso: 0.2,
         hotWater: 0.2,
@@ -293,6 +309,7 @@ class _HomePageState extends State<HomePage> {
         title: "Pinkidy Dinkidy",
       ),
       Cup(
+        custom: true,
         heat: 80,
         espresso: 0.0,
         hotWater: 0.0,
@@ -308,6 +325,7 @@ class _HomePageState extends State<HomePage> {
         title: "3",
       ),
       Cup(
+        custom: true,
         heat: 80,
         espresso: 0.0,
         hotWater: 0.0,
@@ -323,6 +341,7 @@ class _HomePageState extends State<HomePage> {
         title: "4",
       ),
       Cup(
+        custom: true,
         heat: 80,
         espresso: 0.0,
         hotWater: 0.0,
@@ -338,6 +357,7 @@ class _HomePageState extends State<HomePage> {
         title: "5",
       ),
       Cup(
+        custom: true,
         heat: 80,
         espresso: 0.0,
         hotWater: 0.0,
@@ -353,6 +373,7 @@ class _HomePageState extends State<HomePage> {
         title: "6",
       ),
       Cup(
+        custom: true,
         heat: 80,
         espresso: 0.0,
         hotWater: 0.0,

@@ -1,9 +1,10 @@
 import 'package:bean_app_0/components/cup.dart';
 import 'package:bean_app_0/components/cupData.dart';
-import 'package:bean_app_0/components/ingredientSlider.dart';
+import 'package:bean_app_0/components/ingredientSliderDouble.dart';
 import "package:bean_app_0/pages/home_page.dart";
 import "package:flutter/material.dart";
 import '../components/cupDisplay.dart';
+import '../components/ingredientSlider.dart';
 import "../components/login_button_A.dart";
 
 // ignore: must_be_immutable
@@ -20,6 +21,8 @@ class EditCupPage extends StatefulWidget {
 class _EditCupState extends State<EditCupPage> {
   late Cup cup = widget.originalCup.copy();
   late CupData ingredients = cup.largeCup;
+  final titleController = TextEditingController();
+  final descritionController = TextEditingController();
   bool update = false;
 
   void initialize() {
@@ -42,6 +45,17 @@ class _EditCupState extends State<EditCupPage> {
       }
     });
   }
+
+  // void editDetails() {
+  //   showDialog(
+  //       context: context,
+  //       builder: (context) {
+  //         return EditBox(
+  //           titleController,
+  //           descritionController,
+  //         );
+  //       });
+  // }
 
   double sliderVal = 0.0;
   @override
@@ -82,20 +96,26 @@ class _EditCupState extends State<EditCupPage> {
         child: Center(
           child: Column(
             children: [
-              CupDisplay(
-                data: cup,
-                size: 2,
+              GestureDetector(
+                onLongPress: () {},
+                child: CupDisplay(
+                  data: cup,
+                  size: 2,
+                ),
               ),
               Visibility(
                 visible: cup.description != null,
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Text(
-                    cup.description != null ? cup.description! : '',
-                    style: const TextStyle(
-                      color: Colors.white,
+                child: GestureDetector(
+                  onLongPress: () {},
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text(
+                      cup.description != null ? cup.description! : '',
+                      style: const TextStyle(
+                        color: Colors.white,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                    textAlign: TextAlign.center,
                   ),
                 ),
               ),
@@ -176,7 +196,7 @@ class _EditCupState extends State<EditCupPage> {
                 max: ingredients.empty + ingredients.espresso,
                 divisions: ingredients.empty + ingredients.espresso,
                 title: "Espresso",
-                units: " fL oz",
+                units: " Shots",
                 startVal: ingredients.espresso,
                 onChanged: (value) {
                   setState(() {
@@ -193,7 +213,7 @@ class _EditCupState extends State<EditCupPage> {
                 update: update,
                 // limit: 5,
               ),
-              IngredientSlider(
+              IngredientSliderDouble(
                 min: 0,
                 max: ingredients.milkFoamFLoz + ingredients.empty,
                 divisions: ingredients.milkFoamFLoz + ingredients.empty,
@@ -215,7 +235,7 @@ class _EditCupState extends State<EditCupPage> {
                 },
                 update: update,
               ),
-              IngredientSlider(
+              IngredientSliderDouble(
                 min: 0,
                 max: ingredients.steamedMilkFLoz + ingredients.empty,
                 divisions: ingredients.steamedMilkFLoz + ingredients.empty,
@@ -237,7 +257,7 @@ class _EditCupState extends State<EditCupPage> {
                 },
                 update: update,
               ),
-              IngredientSlider(
+              IngredientSliderDouble(
                 min: 0,
                 max: ingredients.hotWaterFLoz + ingredients.empty,
                 divisions: ingredients.hotWaterFLoz + ingredients.empty,
@@ -262,7 +282,7 @@ class _EditCupState extends State<EditCupPage> {
                 max: ingredients.syrupOneFLoz + ingredients.empty,
                 divisions: ingredients.syrupOneFLoz + ingredients.empty,
                 title: "Syrup 1",
-                units: " fL oz",
+                units: " Pumps",
                 startVal: ingredients.syrupOneFLoz,
                 onChanged: (value) {
                   setState(() {
@@ -282,7 +302,7 @@ class _EditCupState extends State<EditCupPage> {
                 max: ingredients.syrupTwoFLoz + ingredients.empty,
                 divisions: ingredients.syrupTwoFLoz + ingredients.empty,
                 title: "Syrup 2",
-                units: " fL oz",
+                units: " Pumps",
                 startVal: ingredients.syrupTwoFLoz,
                 onChanged: (value) {
                   setState(() {
@@ -302,7 +322,7 @@ class _EditCupState extends State<EditCupPage> {
                 max: ingredients.syrupThreeFLoz + ingredients.empty,
                 divisions: ingredients.syrupThreeFLoz + ingredients.empty,
                 title: "Syrup 3",
-                units: " fL oz",
+                units: " Pumps",
                 startVal: ingredients.syrupThreeFLoz,
                 onChanged: (value) {
                   setState(() {
@@ -322,7 +342,7 @@ class _EditCupState extends State<EditCupPage> {
                 max: ingredients.syrupFourFLoz + ingredients.empty,
                 divisions: ingredients.syrupFourFLoz + ingredients.empty,
                 title: "Syrup 4",
-                units: " fL oz",
+                units: " Pumps",
                 startVal: ingredients.syrupFourFLoz,
                 onChanged: (value) {
                   setState(() {
@@ -342,7 +362,7 @@ class _EditCupState extends State<EditCupPage> {
                 max: ingredients.syrupFiveFLoz + ingredients.empty,
                 divisions: ingredients.syrupFiveFLoz + ingredients.empty,
                 title: "Syrup 5",
-                units: " fL oz",
+                units: " Pumps",
                 startVal: ingredients.syrupFiveFLoz,
                 onChanged: (value) {
                   setState(() {
@@ -362,7 +382,7 @@ class _EditCupState extends State<EditCupPage> {
                 max: ingredients.syrupSixFLoz + ingredients.empty,
                 divisions: ingredients.syrupSixFLoz + ingredients.empty,
                 title: "Syrup 6",
-                units: " fL oz",
+                units: " Pumps",
                 startVal: ingredients.syrupSixFLoz,
                 onChanged: (value) {
                   setState(() {
