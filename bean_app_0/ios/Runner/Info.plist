@@ -1,26 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!-- <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-<!-- Google Sign-in Section -->
-<!-- <key>GIDClientID</key> -->
-<!-- TODO Replace this value: -->
-<!-- Copied from GoogleService-Info.plist key CLIENT_ID -->
-<!-- <string>[339349232348-4j9m6kemd1di7f0djikvpjimfe28f4ck]</string> -->
-<!-- <key>CFBundleURLTypes</key> -->
+Google Sign-in Section
+<key>GIDClientID</key>
+TODO Replace this value:
+Copied from GoogleService-Info.plist key CLIENT_ID
+<string>[339349232348-4j9m6kemd1di7f0djikvpjimfe28f4ck]</string>
+<string>[]<string>
+<string>339349232348-4j9m6kemd1di7f0djikvpjimfe28f4ck</string>
+<key>CFBundleURLTypes</key>
 <array>
 	<dict>
 		<key>CFBundleTypeRole</key>
 		<string>Editor</string>
 		<key>CFBundleURLSchemes</key>
 		<array>
-			<!-- TODO Replace this value: -->
-			<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
+			TODO Replace this value:
+			Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID
 			<string>com.googleusercontent.apps.339349232348-4j9m6kemd1di7f0djikvpjimfe28f4ck</string>
+			<string>com.example.beanApp0<string>
+			<string>com.googleusercontent.apps.1:339349232348:ios:71b4579651cac990d07219</string>
+			<string>339349232348-4j9m6kemd1di7f0djikvpjimfe28f4ck</string>
 		</array>
 		</dict>
 	</array>
-<!-- End of the Google Sign-in Section -->
+End of the Google Sign-in Section
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -64,5 +69,72 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+</dict>
+</plist> -->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- Google Sign-in Section -->
+    <key>GIDClientID</key>
+    <string>339349232348-4j9m6kemd1di7f0djikvpjimfe28f4ck</string>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>com.googleusercontent.apps.1:339349232348:ios:71b4579651cac990d07219</string>
+                <string>339349232348-4j9m6kemd1di7f0djikvpjimfe28f4ck</string>
+            </array>
+        </dict>
+    </array>
+    <!-- End of the Google Sign-in Section -->
+
+    <key>CFBundleDevelopmentRegion</key>
+    <string>$(DEVELOPMENT_LANGUAGE)</string>
+    <key>CFBundleDisplayName</key>
+    <string>Bean App 0</string>
+    <key>CFBundleExecutable</key>
+    <string>$(EXECUTABLE_NAME)</string>
+    <key>CFBundleIdentifier</key>
+    <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>CFBundleName</key>
+    <string>bean_app_0</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleShortVersionString</key>
+    <string>$(FLUTTER_BUILD_NAME)</string>
+    <key>CFBundleSignature</key>
+    <string>????</string>
+    <key>CFBundleVersion</key>
+    <string>$(FLUTTER_BUILD_NUMBER)</string>
+    <key>LSRequiresIPhoneOS</key>
+    <true/>
+    <key>UILaunchStoryboardName</key>
+    <string>LaunchScreen</string>
+    <key>UIMainStoryboardFile</key>
+    <string>Main</string>
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationLandscapeLeft</string>
+        <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+    <key>UISupportedInterfaceOrientations~ipad</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationPortraitUpsideDown</string>
+        <string>UIInterfaceOrientationLandscapeLeft</string>
+        <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+    <key>CADisableMinimumFrameDurationOnPhone</key>
+    <true/>
+    <key>UIApplicationSupportsIndirectInputEvents</key>
+    <true/>
 </dict>
 </plist>
