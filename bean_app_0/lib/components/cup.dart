@@ -6,6 +6,7 @@ class Cup {
   String? description;
   double heat;
   double espresso;
+  bool caffeinated;
   double hotWater;
   double syrupOne;
   double syrupTwo;
@@ -15,6 +16,7 @@ class Cup {
   double syrupSix;
   double steamedMilk;
   double milkFoam;
+  bool wholeMilk;
   double empty;
   late double emptyDisplaySmall = 0.6;
   late double espressoDisplaySmall;
@@ -48,6 +50,7 @@ class Cup {
     this.description,
     required this.heat,
     required this.espresso,
+    required this.caffeinated,
     required this.hotWater,
     required this.syrupOne,
     required this.syrupTwo,
@@ -57,34 +60,35 @@ class Cup {
     required this.syrupSix,
     required this.steamedMilk,
     required this.milkFoam,
+    required this.wholeMilk,
     required this.empty,
   }) {
     initialize();
   }
 
   void initialize() {
-    //129
-    espressoDisplayLarge = 129 * espresso;
-    hotWaterDisplayLarge = 129 * hotWater;
-    syrupOneDisplayLarge = 129 * syrupOne;
-    syrupTwoDisplayLarge = 129 * syrupTwo;
-    syrupThreeDisplayLarge = 129 * syrupThree;
-    syrupFourDisplayLarge = 129 * syrupFour;
-    syrupFiveDisplayLarge = 129 * syrupFive;
-    syrupSixDisplayLarge = 129 * syrupSix;
-    steamedMilkDisplayLarge = 129 * steamedMilk;
-    milkFoamDisplayLarge = 129 * milkFoam;
-    emptyDisplayLarge = 0.6 + (129 * empty);
+    //127
+    espressoDisplayLarge = 127 * espresso;
+    hotWaterDisplayLarge = 127 * hotWater;
+    syrupOneDisplayLarge = 127 * syrupOne;
+    syrupTwoDisplayLarge = 127 * syrupTwo;
+    syrupThreeDisplayLarge = 127 * syrupThree;
+    syrupFourDisplayLarge = 127 * syrupFour;
+    syrupFiveDisplayLarge = 127 * syrupFive;
+    syrupSixDisplayLarge = 127 * syrupSix;
+    steamedMilkDisplayLarge = 127 * steamedMilk;
+    milkFoamDisplayLarge = 127 * milkFoam;
+    emptyDisplayLarge = 0.6 + (127 * empty);
     // 8 fl oz
     smallCup = CupData(
       espresso: (8 * espresso).roundToDouble(),
       hotWaterFLoz: ((800 * hotWater).roundToDouble()) / 100,
-      syrupOneFLoz: (16 * syrupOne).roundToDouble(),
-      syrupTwoFLoz: (16 * syrupTwo).roundToDouble(),
-      syrupThreeFLoz: (16 * syrupThree).roundToDouble(),
-      syrupFourFLoz: (16 * syrupFour).roundToDouble(),
-      syrupFiveFLoz: (16 * syrupFive).roundToDouble(),
-      syrupSixFLoz: (16 * syrupSix).roundToDouble(),
+      syrupOneFLoz: (8 * syrupOne).roundToDouble(),
+      syrupTwoFLoz: (8 * syrupTwo).roundToDouble(),
+      syrupThreeFLoz: (8 * syrupThree).roundToDouble(),
+      syrupFourFLoz: (8 * syrupFour).roundToDouble(),
+      syrupFiveFLoz: (8 * syrupFive).roundToDouble(),
+      syrupSixFLoz: (8 * syrupSix).roundToDouble(),
       steamedMilkFLoz: ((800 * steamedMilk).roundToDouble()) / 100,
       milkFoamFLoz: ((800 * milkFoam).roundToDouble()) / 100,
       size: 8,
@@ -94,12 +98,12 @@ class Cup {
     largeCup = CupData(
       espresso: (16 * espresso).roundToDouble(),
       hotWaterFLoz: ((1600 * hotWater).roundToDouble()) / 100,
-      syrupOneFLoz: (32 * syrupOne).roundToDouble(),
-      syrupTwoFLoz: (32 * syrupTwo).roundToDouble(),
-      syrupThreeFLoz: (32 * syrupThree).roundToDouble(),
-      syrupFourFLoz: (32 * syrupFour).roundToDouble(),
-      syrupFiveFLoz: (32 * syrupFive).roundToDouble(),
-      syrupSixFLoz: (32 * syrupSix).roundToDouble(),
+      syrupOneFLoz: (16 * syrupOne).roundToDouble(),
+      syrupTwoFLoz: (16 * syrupTwo).roundToDouble(),
+      syrupThreeFLoz: (16 * syrupThree).roundToDouble(),
+      syrupFourFLoz: (16 * syrupFour).roundToDouble(),
+      syrupFiveFLoz: (16 * syrupFive).roundToDouble(),
+      syrupSixFLoz: (16 * syrupSix).roundToDouble(),
       steamedMilkFLoz: ((1600 * steamedMilk).roundToDouble()) / 100,
       milkFoamFLoz: ((1600 * milkFoam).roundToDouble()) / 100,
       size: 16,
@@ -114,6 +118,7 @@ class Cup {
       description: description,
       heat: heat,
       espresso: espresso,
+      caffeinated: caffeinated,
       hotWater: hotWater,
       syrupOne: syrupOne,
       syrupTwo: syrupTwo,
@@ -123,6 +128,7 @@ class Cup {
       syrupSix: syrupSix,
       steamedMilk: steamedMilk,
       milkFoam: milkFoam,
+      wholeMilk: wholeMilk,
       empty: empty,
     );
   }
@@ -148,12 +154,12 @@ class Cup {
 
     double percentage = newEspresso / size;
     this.empty = empty / size;
-    emptyDisplayLarge = 129 * this.empty;
+    emptyDisplayLarge = 127 * this.empty;
     largeCup.empty = ((1600 * this.empty).roundToDouble()) / 100;
     smallCup.empty = ((800 * this.empty).roundToDouble()) / 100;
 
     espresso = percentage;
-    espressoDisplayLarge = 129 * percentage;
+    espressoDisplayLarge = 127 * percentage;
     // this.espressoDisplaySmall =
     largeCup.espresso = (16 * espresso).roundToDouble();
     smallCup.espresso = (8 * espresso).roundToDouble();
@@ -166,12 +172,12 @@ class Cup {
     double percentage = newMilkFoam / size;
 
     this.empty = empty / size;
-    emptyDisplayLarge = 129 * this.empty;
+    emptyDisplayLarge = 127 * this.empty;
     largeCup.empty = ((1600 * this.empty).roundToDouble()) / 100;
     smallCup.empty = ((800 * this.empty).roundToDouble()) / 100;
 
     milkFoam = percentage;
-    milkFoamDisplayLarge = 129 * percentage;
+    milkFoamDisplayLarge = 127 * percentage;
     // this.espressoDisplaySmall =
     largeCup.milkFoamFLoz = ((1600 * milkFoam).roundToDouble()) / 100;
     smallCup.milkFoamFLoz = ((800 * milkFoam).roundToDouble()) / 100;
@@ -184,12 +190,12 @@ class Cup {
     double percentage = newSteamedMilk / size;
 
     this.empty = empty / size;
-    emptyDisplayLarge = 129 * this.empty;
+    emptyDisplayLarge = 127 * this.empty;
     largeCup.empty = ((1600 * this.empty).roundToDouble()) / 100;
     smallCup.empty = ((800 * this.empty).roundToDouble()) / 100;
 
     steamedMilk = percentage;
-    steamedMilkDisplayLarge = 129 * percentage;
+    steamedMilkDisplayLarge = 127 * percentage;
     // this.espressoDisplaySmall =
     largeCup.steamedMilkFLoz = ((1600 * steamedMilk).roundToDouble()) / 100;
     smallCup.steamedMilkFLoz = ((800 * steamedMilk).roundToDouble()) / 100;
@@ -202,12 +208,12 @@ class Cup {
     double percentage = newHotWater / size;
 
     this.empty = empty / size;
-    emptyDisplayLarge = 129 * this.empty;
+    emptyDisplayLarge = 127 * this.empty;
     largeCup.empty = ((1600 * this.empty).roundToDouble()) / 100;
     smallCup.empty = ((800 * this.empty).roundToDouble()) / 100;
 
     hotWater = percentage;
-    hotWaterDisplayLarge = 129 * percentage;
+    hotWaterDisplayLarge = 127 * percentage;
     // this.espressoDisplaySmall =
     largeCup.hotWaterFLoz = ((1600 * hotWater).roundToDouble()) / 100;
     smallCup.hotWaterFLoz = ((800 * hotWater).roundToDouble()) / 100;
@@ -220,16 +226,16 @@ class Cup {
     //Pump = 0.5 fl oz
     double percentage = newSyrupOne / size;
     this.empty = empty / size;
-    emptyDisplayLarge = 129 * this.empty;
+    emptyDisplayLarge = 127 * this.empty;
 
     largeCup.empty = ((1600 * this.empty).roundToDouble()) / 100;
     smallCup.empty = ((800 * this.empty).roundToDouble()) / 100;
 
     syrupOne = percentage;
-    syrupOneDisplayLarge = 129 * percentage;
+    syrupOneDisplayLarge = 127 * percentage;
 
-    largeCup.syrupOneFLoz = (32 * syrupOne).roundToDouble();
-    smallCup.syrupOneFLoz = (16 * syrupOne).roundToDouble();
+    largeCup.syrupOneFLoz = (16 * syrupOne).roundToDouble();
+    smallCup.syrupOneFLoz = (8 * syrupOne).roundToDouble();
 
     largeCup.updatePrice();
     smallCup.updatePrice();
@@ -241,15 +247,15 @@ class Cup {
     double percentage = newSyrupTwo / size;
 
     this.empty = empty / size;
-    emptyDisplayLarge = 129 * this.empty;
+    emptyDisplayLarge = 127 * this.empty;
     largeCup.empty = ((1600 * this.empty).roundToDouble()) / 100;
     smallCup.empty = ((800 * this.empty).roundToDouble()) / 100;
 
     syrupTwo = percentage;
-    syrupTwoDisplayLarge = 129 * percentage;
+    syrupTwoDisplayLarge = 127 * percentage;
 
-    largeCup.syrupTwoFLoz = (32 * syrupTwo).roundToDouble();
-    smallCup.syrupTwoFLoz = (16 * syrupTwo).roundToDouble();
+    largeCup.syrupTwoFLoz = (16 * syrupTwo).roundToDouble();
+    smallCup.syrupTwoFLoz = (8 * syrupTwo).roundToDouble();
 
     largeCup.updatePrice();
     smallCup.updatePrice();
@@ -261,15 +267,15 @@ class Cup {
     double percentage = newSyrupThree / size;
 
     this.empty = empty / size;
-    emptyDisplayLarge = 129 * this.empty;
+    emptyDisplayLarge = 127 * this.empty;
     largeCup.empty = ((1600 * this.empty).roundToDouble()) / 100;
     smallCup.empty = ((800 * this.empty).roundToDouble()) / 100;
 
     syrupThree = percentage;
-    syrupThreeDisplayLarge = 129 * percentage;
+    syrupThreeDisplayLarge = 127 * percentage;
 
-    largeCup.syrupThreeFLoz = (32 * syrupThree).roundToDouble();
-    smallCup.syrupThreeFLoz = (16 * syrupThree).roundToDouble();
+    largeCup.syrupThreeFLoz = (16 * syrupThree).roundToDouble();
+    smallCup.syrupThreeFLoz = (8 * syrupThree).roundToDouble();
 
     largeCup.updatePrice();
     smallCup.updatePrice();
@@ -281,15 +287,15 @@ class Cup {
     double percentage = newSyrupFour / size;
 
     this.empty = empty / size;
-    emptyDisplayLarge = 129 * this.empty;
+    emptyDisplayLarge = 127 * this.empty;
     largeCup.empty = ((1600 * this.empty).roundToDouble()) / 100;
     smallCup.empty = ((800 * this.empty).roundToDouble()) / 100;
 
     syrupFour = percentage;
-    syrupFourDisplayLarge = 129 * percentage;
+    syrupFourDisplayLarge = 127 * percentage;
 
-    largeCup.syrupFourFLoz = (32 * syrupFour).roundToDouble();
-    smallCup.syrupFourFLoz = (16 * syrupFour).roundToDouble();
+    largeCup.syrupFourFLoz = (16 * syrupFour).roundToDouble();
+    smallCup.syrupFourFLoz = (8 * syrupFour).roundToDouble();
 
     largeCup.updatePrice();
     smallCup.updatePrice();
@@ -301,15 +307,15 @@ class Cup {
     double percentage = newSyrupFive / size;
 
     this.empty = empty / size;
-    emptyDisplayLarge = 129 * this.empty;
+    emptyDisplayLarge = 127 * this.empty;
     largeCup.empty = ((1600 * this.empty).roundToDouble()) / 100;
     smallCup.empty = ((800 * this.empty).roundToDouble()) / 100;
 
     syrupFive = percentage;
-    syrupFiveDisplayLarge = 129 * percentage;
+    syrupFiveDisplayLarge = 127 * percentage;
 
-    largeCup.syrupFiveFLoz = (32 * syrupFive).roundToDouble();
-    smallCup.syrupFiveFLoz = (16 * syrupFive).roundToDouble();
+    largeCup.syrupFiveFLoz = (16 * syrupFive).roundToDouble();
+    smallCup.syrupFiveFLoz = (8 * syrupFive).roundToDouble();
 
     largeCup.updatePrice();
     smallCup.updatePrice();
@@ -321,15 +327,15 @@ class Cup {
     double percentage = newSyrupSix / size;
 
     this.empty = empty / size;
-    emptyDisplayLarge = 129 * this.empty;
+    emptyDisplayLarge = 127 * this.empty;
     largeCup.empty = ((1600 * this.empty).roundToDouble()) / 100;
     smallCup.empty = ((800 * this.empty).roundToDouble()) / 100;
 
     syrupSix = percentage;
-    syrupSixDisplayLarge = 129 * percentage;
+    syrupSixDisplayLarge = 127 * percentage;
 
-    largeCup.syrupSixFLoz = (32 * syrupSix).roundToDouble();
-    smallCup.syrupSixFLoz = (16 * syrupSix).roundToDouble();
+    largeCup.syrupSixFLoz = (16 * syrupSix).roundToDouble();
+    smallCup.syrupSixFLoz = (8 * syrupSix).roundToDouble();
 
     largeCup.updatePrice();
     smallCup.updatePrice();
