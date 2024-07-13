@@ -2,12 +2,13 @@
 
 import 'package:bean_app_0/components/cup.dart';
 import 'package:bean_app_0/components/cupData.dart';
+import 'package:bean_app_0/components/cupImage.dart';
 import 'package:bean_app_0/components/ingredientSliderDouble.dart';
 import 'package:bean_app_0/components/login_button_B.dart';
 import 'package:bean_app_0/components/unusedIngredient.dart';
+import 'package:bean_app_0/pages/editTextBox.dart';
 import "package:bean_app_0/pages/home_page.dart";
 import "package:flutter/material.dart";
-import '../components/cupDisplay.dart';
 import '../components/ingredientSlider.dart';
 import "../components/login_button_A.dart";
 
@@ -123,6 +124,25 @@ class _EditCupState extends State<EditCupPage> {
   //       });
   // }
 
+  final controllerTitle = TextEditingController();
+  final controllerDescription = TextEditingController();
+
+  void editTextInfo() {
+    controllerTitle.text = cup.title;
+
+    controllerDescription.text =
+        cup.description != null ? cup.description! : '';
+    showDialog(
+      context: context,
+      builder: (context) {
+        return EditTextBox(
+            controllerTitle: controllerTitle,
+            controllerDescription: controllerDescription,
+            saved: () {});
+      },
+    );
+  }
+
   double sliderVal = 0.0;
   @override
   Widget build(BuildContext context) {
@@ -163,24 +183,41 @@ class _EditCupState extends State<EditCupPage> {
           child: Column(
             children: [
               GestureDetector(
-                onLongPress: () {},
-                child: CupDisplay(
+                onTap: editTextInfo, //Make it so that the title can be edited.
+                onLongPress:
+                    editTextInfo, //Make it so that the title can be edited.
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    cup.title,
+                    style: const TextStyle(color: Colors.white, fontSize: 28),
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onLongPress: editTextInfo,
+                child: CupImage(
                   data: cup,
                   size: 2,
                 ),
               ),
-              Visibility(
-                visible: cup.description != null,
-                child: GestureDetector(
-                  onLongPress: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Text(
-                      cup.description != null ? cup.description! : '',
-                      style: const TextStyle(
-                        color: Colors.white,
+              GestureDetector(
+                onTap: editTextInfo,
+                onLongPress: editTextInfo,
+                child: Visibility(
+                  ///Make editable!!!
+                  visible: cup.description != null,
+                  child: GestureDetector(
+                    onLongPress: () {},
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Text(
+                        cup.description != null ? cup.description! : '',
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
-                      textAlign: TextAlign.center,
                     ),
                   ),
                 ),
@@ -309,26 +346,6 @@ class _EditCupState extends State<EditCupPage> {
                           width: 2,
                         ),
                       ),
-                      // const Text(
-                      //   "Large",
-                      //   style: TextStyle(
-                      //     color: Colors.white,
-                      //     fontSize: 20,
-                      //   ),
-                      // ),
-                      // Checkbox(
-                      //   value: cup.size == 2,
-                      //   onChanged: (value) {
-                      //     changeSize();
-                      //   },
-                      //   shape: const CircleBorder(),
-                      //   checkColor: const Color.fromRGBO(184, 148, 7, 1),
-                      //   activeColor: const Color.fromRGBO(184, 148, 7, 1),
-                      //   side: const BorderSide(
-                      //     color: Colors.grey,
-                      //     width: 2,
-                      //   ),
-                      // ),
                     ],
                   ),
                 ),

@@ -1,9 +1,8 @@
 import 'package:bean_app_0/components/cup.dart';
-import "package:bean_app_0/pages/editCupPage.dart";
+import 'package:bean_app_0/components/itemGrid.dart';
+import 'package:bean_app_0/components/itemRow.dart';
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
-import 'package:list_wheel_scroll_view_nls/list_wheel_scroll_view_nls.dart';
-import '../components/cupDisplay.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -95,7 +94,7 @@ class _HomePageState extends State<HomePage> {
         steamedMilk: 0.0,
         milkFoam: 0.0,
         wholeMilk: true,
-        empty: 0.1,
+        empty: 1.0,
         title: "3",
       ),
       Cup(
@@ -113,7 +112,7 @@ class _HomePageState extends State<HomePage> {
         steamedMilk: 0.0,
         milkFoam: 0.0,
         wholeMilk: true,
-        empty: 0.1,
+        empty: 1.0,
         title: "4",
       ),
       Cup(
@@ -131,7 +130,7 @@ class _HomePageState extends State<HomePage> {
         steamedMilk: 0.0,
         wholeMilk: true,
         milkFoam: 0.0,
-        empty: 0.1,
+        empty: 1.0,
         title: "5",
       ),
       Cup(
@@ -149,7 +148,7 @@ class _HomePageState extends State<HomePage> {
         steamedMilk: 0.0,
         wholeMilk: true,
         milkFoam: 0.0,
-        empty: 0.1,
+        empty: 1.0,
         title: "6",
       ),
       Cup(
@@ -167,7 +166,7 @@ class _HomePageState extends State<HomePage> {
         steamedMilk: 0.0,
         wholeMilk: true,
         milkFoam: 0.0,
-        empty: 0.1,
+        empty: 1.0,
         title: "7",
       ),
     ];
@@ -225,7 +224,7 @@ class _HomePageState extends State<HomePage> {
         steamedMilk: 0.0,
         milkFoam: 0.0,
         wholeMilk: true,
-        empty: 0.1,
+        empty: 1.0,
         title: "3",
       ),
       Cup(
@@ -243,7 +242,7 @@ class _HomePageState extends State<HomePage> {
         steamedMilk: 0.0,
         milkFoam: 0.0,
         wholeMilk: true,
-        empty: 0.1,
+        empty: 1.0,
         title: "4",
       ),
       Cup(
@@ -261,7 +260,7 @@ class _HomePageState extends State<HomePage> {
         steamedMilk: 0.0,
         milkFoam: 0.0,
         wholeMilk: true,
-        empty: 0.1,
+        empty: 1.0,
         title: "5",
       ),
       Cup(
@@ -279,7 +278,7 @@ class _HomePageState extends State<HomePage> {
         steamedMilk: 0.0,
         milkFoam: 0.0,
         wholeMilk: true,
-        empty: 0.1,
+        empty: 1.0,
         title: "6",
       ),
       Cup(
@@ -297,7 +296,7 @@ class _HomePageState extends State<HomePage> {
         steamedMilk: 0.0,
         milkFoam: 0.0,
         wholeMilk: true,
-        empty: 0.1,
+        empty: 1.0,
         title: "7",
       ),
     ];
@@ -355,7 +354,7 @@ class _HomePageState extends State<HomePage> {
         steamedMilk: 0.0,
         milkFoam: 0.0,
         wholeMilk: true,
-        empty: 0.1,
+        empty: 1.0,
         title: "3",
       ),
       Cup(
@@ -373,7 +372,7 @@ class _HomePageState extends State<HomePage> {
         steamedMilk: 0.0,
         milkFoam: 0.0,
         wholeMilk: true,
-        empty: 0.1,
+        empty: 1.0,
         title: "4",
       ),
       Cup(
@@ -391,7 +390,7 @@ class _HomePageState extends State<HomePage> {
         steamedMilk: 0.0,
         milkFoam: 0.0,
         wholeMilk: true,
-        empty: 0.1,
+        empty: 1.0,
         title: "5",
       ),
       Cup(
@@ -409,7 +408,7 @@ class _HomePageState extends State<HomePage> {
         steamedMilk: 0.0,
         milkFoam: 0.0,
         wholeMilk: true,
-        empty: 0.1,
+        empty: 1.0,
         title: "6",
       ),
       Cup(
@@ -427,7 +426,7 @@ class _HomePageState extends State<HomePage> {
         steamedMilk: 0.0,
         milkFoam: 0.0,
         wholeMilk: true,
-        empty: 0.1,
+        empty: 1.0,
         title: "7",
       )
     ];
@@ -460,169 +459,20 @@ class _HomePageState extends State<HomePage> {
         }),
       ),
       body: (standardExpand == true)
-          ? Column(
-              children: [
-                // Standard
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 40),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      const Text(
-                        "Standard",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          toggleStandardExpand();
-                        },
-                        child: Text(
-                          "shrink",
-                          style:
-                              TextStyle(color: Colors.grey[600], fontSize: 16),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                    child: GridView.builder(
-                        itemCount: standardCoffeeStack.length,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2),
-                        itemBuilder: (context, index) {
-                          return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => EditCupPage(
-                                            originalCup:
-                                                favoritesCoffeeStack[index % 7],
-                                          )),
-                                );
-                              },
-                              child: CupDisplay(
-                                  data: standardCoffeeStack[index % 7],
-                                  size: 1));
-                        })),
-              ],
-            )
+          ? ItemGrid(
+              title: "Standard",
+              toggleExpand: toggleStandardExpand,
+              stack: standardCoffeeStack)
           : (recentExpand == true)
-              ? Column(
-                  children: [
-                    // Standard
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 40),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          const Text(
-                            "Recent",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 24),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              toggleRecentsExpand();
-                            },
-                            child: Text(
-                              "shrink",
-                              style: TextStyle(
-                                  color: Colors.grey[600], fontSize: 16),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                        child: GridView.builder(
-                            itemCount: recentCoffeeStack.length,
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2),
-                            itemBuilder: (context, index) {
-                              return GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => EditCupPage(
-                                                originalCup: recentCoffeeStack[
-                                                    index % 7],
-                                              )),
-                                    );
-                                  },
-                                  child: CupDisplay(
-                                    data: recentCoffeeStack[index % 7],
-                                    size: 1,
-                                  ));
-                            })),
-                  ],
-                )
+              ? ItemGrid(
+                  title: "Recent",
+                  toggleExpand: toggleRecentsExpand,
+                  stack: recentCoffeeStack)
               : (favoriteExpand)
-                  ? Column(
-                      children: [
-                        // Standard
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 40),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              const Text(
-                                "Favorite",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 24),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  toggleFavoritesExpand();
-                                },
-                                child: Text(
-                                  "shrink",
-                                  style: TextStyle(
-                                      color: Colors.grey[600], fontSize: 16),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                            child: GridView.builder(
-                                itemCount: favoritesCoffeeStack.length,
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 2),
-                                itemBuilder: (context, index) {
-                                  return GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => EditCupPage(
-                                                    originalCup:
-                                                        favoritesCoffeeStack[
-                                                            index % 7],
-                                                  )),
-                                        );
-                                      },
-                                      child: CupDisplay(
-                                        data: favoritesCoffeeStack[index % 7],
-                                        size: 1,
-                                      ));
-                                })),
-                      ],
-                    )
+                  ? ItemGrid(
+                      title: "Favorites",
+                      toggleExpand: toggleFavoritesExpand,
+                      stack: favoritesCoffeeStack)
                   : Column(
                       children: [
                         // Standard
@@ -652,33 +502,7 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ),
-                        Expanded(
-                          child: ListWheelScrollViewX.useDelegate(
-                            scrollDirection: Axis.horizontal,
-                            itemExtent: 200,
-                            childDelegate: ListWheelChildBuilderDelegate(
-                              builder: (context, index) {
-                                return GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => EditCupPage(
-                                                  originalCup:
-                                                      standardCoffeeStack[
-                                                          index % 7],
-                                                )),
-                                      );
-                                    },
-                                    child: CupDisplay(
-                                        data: standardCoffeeStack[index % 7],
-                                        size: 1));
-                              },
-                            ),
-                            // specify the height or width of each item based on the scroll direction,
-                            // scrollDirection: Axis.horizontal,
-                          ),
-                        ),
+                        ItemRow(stack: standardCoffeeStack),
 
                         // Recomended
                         Divider(
@@ -711,34 +535,7 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ),
-                        Expanded(
-                          child: ListWheelScrollViewX.useDelegate(
-                              scrollDirection: Axis.horizontal,
-                              childDelegate: ListWheelChildBuilderDelegate(
-                                builder: (context, index) {
-                                  return GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => EditCupPage(
-                                                    originalCup:
-                                                        recentCoffeeStack[
-                                                            index % 7],
-                                                  )),
-                                        );
-                                      },
-                                      child: CupDisplay(
-                                          data: recentCoffeeStack[index % 7],
-                                          size: 1));
-                                },
-                              ),
-                              itemExtent:
-                                  200 // specify the height or width of each item based on the scroll direction,
-                              // scrollDirection: Axis.horizontal,
-                              ),
-                        ),
-
+                        ItemRow(stack: recentCoffeeStack),
                         // Custom
                         Divider(
                           thickness: 4,
@@ -770,32 +567,7 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ),
-                        Expanded(
-                          child: ListWheelScrollViewX.useDelegate(
-                              scrollDirection: Axis.horizontal,
-                              childDelegate: ListWheelChildBuilderDelegate(
-                                builder: (context, index) {
-                                  return GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => EditCupPage(
-                                                  originalCup:
-                                                      favoritesCoffeeStack[
-                                                          index % 7])),
-                                        );
-                                      },
-                                      child: CupDisplay(
-                                          data: favoritesCoffeeStack[index % 7],
-                                          size: 1));
-                                },
-                              ),
-                              itemExtent:
-                                  200 // specify the height or width of each item based on the scroll direction,
-                              // scrollDirection: Axis.horizontal,
-                              ),
-                        ),
+                        ItemRow(stack: favoritesCoffeeStack),
                       ],
                     ),
       drawer: Drawer(

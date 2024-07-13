@@ -20,7 +20,6 @@ class Cup {
   double empty;
   late double emptyDisplaySmall = 0.6;
   late double espressoDisplaySmall;
-  late double hotWaterDisplaySmall;
   late double syrupOneDisplaySmall;
   late double syrupTwoDisplaySmall;
   late double syrupThreeDisplaySmall;
@@ -68,8 +67,8 @@ class Cup {
 
   void initialize() {
     //127
-    espressoDisplayLarge = 127 * espresso;
-    hotWaterDisplayLarge = 127 * hotWater;
+    espressoDisplayLarge = 127 * (espresso + hotWater);
+    hotWaterDisplayLarge = 0;
     syrupOneDisplayLarge = 127 * syrupOne;
     syrupTwoDisplayLarge = 127 * syrupTwo;
     syrupThreeDisplayLarge = 127 * syrupThree;
@@ -159,7 +158,7 @@ class Cup {
     smallCup.empty = ((800 * this.empty).roundToDouble()) / 100;
 
     espresso = percentage;
-    espressoDisplayLarge = 127 * percentage;
+    espressoDisplayLarge = 127 * (percentage + hotWater);
     // this.espressoDisplaySmall =
     largeCup.espresso = (16 * espresso).roundToDouble();
     smallCup.espresso = (8 * espresso).roundToDouble();
@@ -213,7 +212,7 @@ class Cup {
     smallCup.empty = ((800 * this.empty).roundToDouble()) / 100;
 
     hotWater = percentage;
-    hotWaterDisplayLarge = 127 * percentage;
+    espressoDisplayLarge = 127 * (percentage + espresso);
     // this.espressoDisplaySmall =
     largeCup.hotWaterFLoz = ((1600 * hotWater).roundToDouble()) / 100;
     smallCup.hotWaterFLoz = ((800 * hotWater).roundToDouble()) / 100;
