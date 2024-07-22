@@ -128,20 +128,26 @@ class _EditCupState extends State<EditCupPage> {
   final controllerDescription = TextEditingController();
 
   void editTextInfo() {
-    controllerTitle.text = cup.title;
+    if (cup.custom) {
+      controllerTitle.text = cup.title;
 
-    controllerDescription.text =
-        cup.description != null ? cup.description! : '';
-    showDialog(
-      context: context,
-      builder: (context) {
-        return EditTextBox(
-            controllerTitle: controllerTitle,
-            controllerDescription: controllerDescription,
-            saved: () {});
-      },
-    );
+      controllerDescription.text =
+          cup.description != null ? cup.description! : '';
+      showDialog(
+        context: context,
+        builder: (context) {
+          return EditTextBox(
+              controllerTitle: controllerTitle,
+              controllerDescription: controllerDescription,
+              saved: () {
+                saveText();
+              });
+        },
+      );
+    }
   }
+
+  void saveText() {}
 
   double sliderVal = 0.0;
   @override
@@ -207,17 +213,14 @@ class _EditCupState extends State<EditCupPage> {
                 child: Visibility(
                   ///Make editable!!!
                   visible: cup.description != null,
-                  child: GestureDetector(
-                    onLongPress: () {},
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Text(
-                        cup.description != null ? cup.description! : '',
-                        style: const TextStyle(
-                          color: Colors.white,
-                        ),
-                        textAlign: TextAlign.center,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text(
+                      cup.description != null ? cup.description! : '',
+                      style: const TextStyle(
+                        color: Colors.white,
                       ),
+                      textAlign: TextAlign.center,
                     ),
                   ),
                 ),

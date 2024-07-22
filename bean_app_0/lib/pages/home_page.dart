@@ -1,8 +1,10 @@
 import 'package:bean_app_0/components/cup.dart';
 import 'package:bean_app_0/components/itemGrid.dart';
 import 'package:bean_app_0/components/itemRow.dart';
+import 'package:bean_app_0/pages/tempDataBase.dart';
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
+import 'package:hive_flutter/hive_flutter.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,9 +14,26 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final box = Hive.box("tempBox");
+  TempDataBase data = TempDataBase();
   bool standardExpand = false;
   bool favoriteExpand = false;
   bool recentExpand = false;
+
+  @override
+  void initState() {
+    print("\n\n\n\n\test initState\n\n\n\n");
+    print(box.get("tempData") == null);
+    // If this is the first time the app has been opened start with the demo data.
+    if (box.get("tempData") == null) {
+      data.createInitialData();
+    }
+    // If not then load the data from the database
+    else {
+      data.load();
+    }
+    super.initState();
+  }
 
   void toggleStandardExpand() {
     setState(() {
@@ -40,396 +59,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final standardCoffeeStack = [
-      Cup(
-        custom: false,
-        heat: 80,
-        espresso: 0.2,
-        caffeinated: true,
-        hotWater: 0.0,
-        syrupOne: 0.0,
-        syrupTwo: 0.0,
-        syrupThree: 0.1,
-        syrupFour: 0.0,
-        syrupFive: 0.0,
-        syrupSix: 0.0,
-        steamedMilk: 0.3,
-        milkFoam: 0.3,
-        wholeMilk: true,
-        empty: 0.1,
-        title: "Orange Mocha Frappucino",
-        description:
-            "Is there anything more to life than being really really really ridiculously good looking? You know what can help you sort through this important issue? ORANGE MOCHA FRAPPUCINO!!!",
-      ),
-      Cup(
-        custom: false,
-        heat: 80,
-        espresso: 0.2,
-        caffeinated: false,
-        hotWater: 0.2,
-        syrupOne: 0.0,
-        syrupTwo: 0.2,
-        syrupThree: 0.0,
-        syrupFour: 0.0,
-        syrupFive: 0.0,
-        syrupSix: 0.0,
-        steamedMilk: 0.0,
-        milkFoam: 0.3,
-        wholeMilk: false,
-        empty: 0.1,
-        title: "Pinkidy Dinkidy",
-      ),
-      Cup(
-        custom: false,
-        heat: 80,
-        espresso: 0.0,
-        caffeinated: true,
-        hotWater: 0.0,
-        syrupOne: 0.0,
-        syrupTwo: 0.0,
-        syrupThree: 0.0,
-        syrupFour: 0.0,
-        syrupFive: 0.0,
-        syrupSix: 0.0,
-        steamedMilk: 0.0,
-        milkFoam: 0.0,
-        wholeMilk: true,
-        empty: 1.0,
-        title: "3",
-      ),
-      Cup(
-        custom: false,
-        heat: 80,
-        espresso: 0.0,
-        caffeinated: true,
-        hotWater: 0.0,
-        syrupOne: 0.0,
-        syrupTwo: 0.0,
-        syrupThree: 0.0,
-        syrupFour: 0.0,
-        syrupFive: 0.0,
-        syrupSix: 0.0,
-        steamedMilk: 0.0,
-        milkFoam: 0.0,
-        wholeMilk: true,
-        empty: 1.0,
-        title: "4",
-      ),
-      Cup(
-        custom: false,
-        heat: 80,
-        espresso: 0.0,
-        caffeinated: true,
-        hotWater: 0.0,
-        syrupOne: 0.0,
-        syrupTwo: 0.0,
-        syrupThree: 0.0,
-        syrupFour: 0.0,
-        syrupFive: 0.0,
-        syrupSix: 0.0,
-        steamedMilk: 0.0,
-        wholeMilk: true,
-        milkFoam: 0.0,
-        empty: 1.0,
-        title: "5",
-      ),
-      Cup(
-        custom: false,
-        heat: 80,
-        espresso: 0.0,
-        caffeinated: true,
-        hotWater: 0.0,
-        syrupOne: 0.0,
-        syrupTwo: 0.0,
-        syrupThree: 0.0,
-        syrupFour: 0.0,
-        syrupFive: 0.0,
-        syrupSix: 0.0,
-        steamedMilk: 0.0,
-        wholeMilk: true,
-        milkFoam: 0.0,
-        empty: 1.0,
-        title: "6",
-      ),
-      Cup(
-        custom: false,
-        heat: 80,
-        espresso: 0.0,
-        caffeinated: true,
-        hotWater: 0.0,
-        syrupOne: 0.0,
-        syrupTwo: 0.0,
-        syrupThree: 0.0,
-        syrupFour: 0.0,
-        syrupFive: 0.0,
-        syrupSix: 0.0,
-        steamedMilk: 0.0,
-        wholeMilk: true,
-        milkFoam: 0.0,
-        empty: 1.0,
-        title: "7",
-      ),
-    ];
-    final recentCoffeeStack = [
-      Cup(
-        custom: false,
-        heat: 80,
-        espresso: 0.2,
-        caffeinated: true,
-        hotWater: 0.2,
-        syrupOne: 0.0,
-        syrupTwo: 0.2,
-        syrupThree: 0.0,
-        syrupFour: 0.0,
-        syrupFive: 0.0,
-        syrupSix: 0.0,
-        steamedMilk: 0.0,
-        wholeMilk: true,
-        milkFoam: 0.3,
-        empty: 0.1,
-        title: "Pinkidy Dinkidy",
-      ),
-      Cup(
-        custom: true,
-        heat: 80,
-        espresso: 0.2,
-        caffeinated: true,
-        hotWater: 0.0,
-        syrupOne: 0.0,
-        syrupTwo: 0.0,
-        syrupThree: 0.1,
-        syrupFour: 0.0,
-        syrupFive: 0.0,
-        syrupSix: 0.0,
-        steamedMilk: 0.3,
-        wholeMilk: false,
-        milkFoam: 0.3,
-        empty: 0.1,
-        title: "Orange Mocha Frappucino",
-        description:
-            "Is there anything more to life than being really really really ridiculously good looking? You know what can help you sort through this important issue? ORANGE MOCHA FRAPPUCINO!!!",
-      ),
-      Cup(
-        custom: false,
-        heat: 80,
-        espresso: 0.0,
-        caffeinated: true,
-        hotWater: 0.0,
-        syrupOne: 0.0,
-        syrupTwo: 0.0,
-        syrupThree: 0.0,
-        syrupFour: 0.0,
-        syrupFive: 0.0,
-        syrupSix: 0.0,
-        steamedMilk: 0.0,
-        milkFoam: 0.0,
-        wholeMilk: true,
-        empty: 1.0,
-        title: "3",
-      ),
-      Cup(
-        custom: false,
-        heat: 80,
-        espresso: 0.0,
-        caffeinated: true,
-        hotWater: 0.0,
-        syrupOne: 0.0,
-        syrupTwo: 0.0,
-        syrupThree: 0.0,
-        syrupFour: 0.0,
-        syrupFive: 0.0,
-        syrupSix: 0.0,
-        steamedMilk: 0.0,
-        milkFoam: 0.0,
-        wholeMilk: true,
-        empty: 1.0,
-        title: "4",
-      ),
-      Cup(
-        custom: false,
-        heat: 80,
-        espresso: 0.0,
-        caffeinated: true,
-        hotWater: 0.0,
-        syrupOne: 0.0,
-        syrupTwo: 0.0,
-        syrupThree: 0.0,
-        syrupFour: 0.0,
-        syrupFive: 0.0,
-        syrupSix: 0.0,
-        steamedMilk: 0.0,
-        milkFoam: 0.0,
-        wholeMilk: true,
-        empty: 1.0,
-        title: "5",
-      ),
-      Cup(
-        custom: false,
-        heat: 80,
-        espresso: 0.0,
-        caffeinated: true,
-        hotWater: 0.0,
-        syrupOne: 0.0,
-        syrupTwo: 0.0,
-        syrupThree: 0.0,
-        syrupFour: 0.0,
-        syrupFive: 0.0,
-        syrupSix: 0.0,
-        steamedMilk: 0.0,
-        milkFoam: 0.0,
-        wholeMilk: true,
-        empty: 1.0,
-        title: "6",
-      ),
-      Cup(
-        custom: false,
-        heat: 80,
-        espresso: 0.0,
-        caffeinated: true,
-        hotWater: 0.0,
-        syrupOne: 0.0,
-        syrupTwo: 0.0,
-        syrupThree: 0.0,
-        syrupFour: 0.0,
-        syrupFive: 0.0,
-        syrupSix: 0.0,
-        steamedMilk: 0.0,
-        milkFoam: 0.0,
-        wholeMilk: true,
-        empty: 1.0,
-        title: "7",
-      ),
-    ];
-    final favoritesCoffeeStack = [
-      Cup(
-        custom: true,
-        heat: 80,
-        espresso: 0.2,
-        caffeinated: true,
-        hotWater: 0.0,
-        syrupOne: 0.0,
-        syrupTwo: 0.0,
-        syrupThree: 0.1,
-        syrupFour: 0.0,
-        syrupFive: 0.0,
-        syrupSix: 0.0,
-        steamedMilk: 0.3,
-        wholeMilk: true,
-        milkFoam: 0.3,
-        empty: 0.1,
-        title: "Orange Mocha Frappucino",
-        description:
-            "Is there anything more to life than being really really really ridiculously good looking? You know what can help you sort through this important issue? ORANGE MOCHA FRAPPUCINO!!!",
-      ),
-      Cup(
-        custom: true,
-        heat: 80,
-        espresso: 0.2,
-        caffeinated: false,
-        hotWater: 0.2,
-        syrupOne: 0.0,
-        syrupTwo: 0.2,
-        syrupThree: 0.0,
-        syrupFour: 0.0,
-        syrupFive: 0.0,
-        syrupSix: 0.0,
-        steamedMilk: 0.0,
-        wholeMilk: true,
-        milkFoam: 0.3,
-        empty: 0.1,
-        title: "Pinkidy Dinkidy",
-      ),
-      Cup(
-        custom: true,
-        heat: 80,
-        espresso: 0.0,
-        caffeinated: true,
-        hotWater: 0.0,
-        syrupOne: 0.0,
-        syrupTwo: 0.0,
-        syrupThree: 0.0,
-        syrupFour: 0.0,
-        syrupFive: 0.0,
-        syrupSix: 0.0,
-        steamedMilk: 0.0,
-        milkFoam: 0.0,
-        wholeMilk: true,
-        empty: 1.0,
-        title: "3",
-      ),
-      Cup(
-        custom: true,
-        heat: 80,
-        espresso: 0.0,
-        caffeinated: true,
-        hotWater: 0.0,
-        syrupOne: 0.0,
-        syrupTwo: 0.0,
-        syrupThree: 0.0,
-        syrupFour: 0.0,
-        syrupFive: 0.0,
-        syrupSix: 0.0,
-        steamedMilk: 0.0,
-        milkFoam: 0.0,
-        wholeMilk: true,
-        empty: 1.0,
-        title: "4",
-      ),
-      Cup(
-        custom: true,
-        heat: 80,
-        espresso: 0.0,
-        caffeinated: true,
-        hotWater: 0.0,
-        syrupOne: 0.0,
-        syrupTwo: 0.0,
-        syrupThree: 0.0,
-        syrupFour: 0.0,
-        syrupFive: 0.0,
-        syrupSix: 0.0,
-        steamedMilk: 0.0,
-        milkFoam: 0.0,
-        wholeMilk: true,
-        empty: 1.0,
-        title: "5",
-      ),
-      Cup(
-        custom: true,
-        heat: 80,
-        espresso: 0.0,
-        caffeinated: true,
-        hotWater: 0.0,
-        syrupOne: 0.0,
-        syrupTwo: 0.0,
-        syrupThree: 0.0,
-        syrupFour: 0.0,
-        syrupFive: 0.0,
-        syrupSix: 0.0,
-        steamedMilk: 0.0,
-        milkFoam: 0.0,
-        wholeMilk: true,
-        empty: 1.0,
-        title: "6",
-      ),
-      Cup(
-        custom: true,
-        heat: 80,
-        espresso: 0.0,
-        caffeinated: true,
-        hotWater: 0.0,
-        syrupOne: 0.0,
-        syrupTwo: 0.0,
-        syrupThree: 0.0,
-        syrupFour: 0.0,
-        syrupFive: 0.0,
-        syrupSix: 0.0,
-        steamedMilk: 0.0,
-        milkFoam: 0.0,
-        wholeMilk: true,
-        empty: 1.0,
-        title: "7",
-      )
-    ];
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -462,17 +91,17 @@ class _HomePageState extends State<HomePage> {
           ? ItemGrid(
               title: "Standard",
               toggleExpand: toggleStandardExpand,
-              stack: standardCoffeeStack)
+              stack: data.tempList.standardCoffeeStack)
           : (recentExpand == true)
               ? ItemGrid(
                   title: "Recent",
                   toggleExpand: toggleRecentsExpand,
-                  stack: recentCoffeeStack)
+                  stack: data.tempList.recentCoffeeStack)
               : (favoriteExpand)
                   ? ItemGrid(
                       title: "Favorites",
                       toggleExpand: toggleFavoritesExpand,
-                      stack: favoritesCoffeeStack)
+                      stack: data.tempList.favoritesCoffeeStack)
                   : Column(
                       children: [
                         // Standard
@@ -502,7 +131,7 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ),
-                        ItemRow(stack: standardCoffeeStack),
+                        ItemRow(stack: data.tempList.standardCoffeeStack),
 
                         // Recomended
                         Divider(
@@ -535,7 +164,7 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ),
-                        ItemRow(stack: recentCoffeeStack),
+                        ItemRow(stack: data.tempList.recentCoffeeStack),
                         // Custom
                         Divider(
                           thickness: 4,
@@ -567,7 +196,7 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ),
-                        ItemRow(stack: favoritesCoffeeStack),
+                        ItemRow(stack: data.tempList.favoritesCoffeeStack),
                       ],
                     ),
       drawer: Drawer(

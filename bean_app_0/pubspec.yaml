@@ -38,6 +38,7 @@ dependencies:
   firebase_auth: ^4.17.4
   google_sign_in: ^6.2.1
   list_wheel_scroll_view_nls: ^0.0.3
+  hive_flutter: ^1.1.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
