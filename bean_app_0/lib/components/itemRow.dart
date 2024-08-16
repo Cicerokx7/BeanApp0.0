@@ -1,12 +1,18 @@
 import 'package:bean_app_0/components/cupCard.dart';
+import 'package:bean_app_0/data/tempDataBase.dart';
 import 'package:bean_app_0/pages/editCupPage.dart';
 import "package:flutter/material.dart";
 import 'package:list_wheel_scroll_view_nls/list_wheel_scroll_view_nls.dart';
 
 class ItemRow extends StatelessWidget {
   final stack;
+  final TempDataBase box;
 
-  const ItemRow({super.key, required this.stack});
+  ItemRow({
+    super.key,
+    required this.stack,
+    required this.box,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +29,7 @@ class ItemRow extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (context) => EditCupPage(
                               originalCup: stack[index % 7],
+                              box: box,
                             )),
                   );
                 },

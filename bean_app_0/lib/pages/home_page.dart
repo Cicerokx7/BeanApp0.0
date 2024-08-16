@@ -1,10 +1,13 @@
+import 'package:bean_app_0/components/cartDrawer.dart';
 import 'package:bean_app_0/components/cup.dart';
 import 'package:bean_app_0/components/itemGrid.dart';
 import 'package:bean_app_0/components/itemRow.dart';
-import 'package:bean_app_0/pages/tempDataBase.dart';
+import 'package:bean_app_0/data/tempDataBase.dart';
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 import 'package:hive_flutter/hive_flutter.dart';
+
+import '../data/data.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,7 +17,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final box = Hive.box("tempBox");
+  final box = Hive.box('tempBox');
   TempDataBase data = TempDataBase();
   bool standardExpand = false;
   bool favoriteExpand = false;
@@ -23,7 +26,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     print("\n\n\n\n\test initState\n\n\n\n");
-    print(box.get("tempData") == null);
+    // print(box.get("tempData") == null);
     // If this is the first time the app has been opened start with the demo data.
     if (box.get("tempData") == null) {
       data.createInitialData();
@@ -91,17 +94,23 @@ class _HomePageState extends State<HomePage> {
           ? ItemGrid(
               title: "Standard",
               toggleExpand: toggleStandardExpand,
-              stack: data.tempList.standardCoffeeStack)
+              stacki: 0,
+              box: data,
+            )
           : (recentExpand == true)
               ? ItemGrid(
                   title: "Recent",
                   toggleExpand: toggleRecentsExpand,
-                  stack: data.tempList.recentCoffeeStack)
+                  stacki: 1,
+                  box: data,
+                )
               : (favoriteExpand)
                   ? ItemGrid(
                       title: "Favorites",
                       toggleExpand: toggleFavoritesExpand,
-                      stack: data.tempList.favoritesCoffeeStack)
+                      stacki: 2,
+                      box: data,
+                    )
                   : Column(
                       children: [
                         // Standard
@@ -131,7 +140,10 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ),
-                        ItemRow(stack: data.tempList.standardCoffeeStack),
+                        ItemRow(
+                          stack: data.tempList[0],
+                          box: data,
+                        ),
 
                         // Recomended
                         Divider(
@@ -164,7 +176,10 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ),
-                        ItemRow(stack: data.tempList.recentCoffeeStack),
+                        ItemRow(
+                          stack: data.tempList[1],
+                          box: data,
+                        ),
                         // Custom
                         Divider(
                           thickness: 4,
@@ -196,7 +211,10 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ),
-                        ItemRow(stack: data.tempList.favoritesCoffeeStack),
+                        ItemRow(
+                          stack: data.tempList[2],
+                          box: data,
+                        ),
                       ],
                     ),
       drawer: Drawer(
@@ -275,6 +293,9 @@ class _HomePageState extends State<HomePage> {
       ),
       endDrawer: Drawer(
         backgroundColor: Colors.grey[900],
+        child: cartDawer(
+          box: data,
+        ),
       ),
     );
   }

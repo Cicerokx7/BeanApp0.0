@@ -9,6 +9,7 @@ import 'package:bean_app_0/components/unusedIngredient.dart';
 import 'package:bean_app_0/pages/editTextBox.dart';
 import "package:bean_app_0/pages/home_page.dart";
 import "package:flutter/material.dart";
+import '../components/cartDrawer.dart';
 import '../components/ingredientSlider.dart';
 import "../components/login_button_A.dart";
 
@@ -25,10 +26,12 @@ class EditCupPage extends StatefulWidget {
   bool syrupSixUsed = false;
   bool steamedMilkUsed = false;
   bool milkFoamUsed = false;
+  final box;
 
   EditCupPage({
     super.key,
     required this.originalCup,
+    required this.box,
   }) {
     initialize();
   }
@@ -149,6 +152,13 @@ class _EditCupState extends State<EditCupPage> {
 
   void saveText() {}
 
+  void addToCart() {
+    setState(() {
+      widget.box.tempList.cart.add(cup);
+      widget.box.update();
+    });
+  }
+
   double sliderVal = 0.0;
   @override
   Widget build(BuildContext context) {
@@ -161,6 +171,7 @@ class _EditCupState extends State<EditCupPage> {
           Builder(builder: (context) {
             return IconButton(
                 onPressed: () {
+                  print("TEST");
                   Scaffold.of(context).openEndDrawer();
                 },
                 icon: const Icon(
@@ -235,7 +246,7 @@ class _EditCupState extends State<EditCupPage> {
               ),
               LoginButtonA(
                 text: "Add to Cart",
-                onTap: () {},
+                onTap: addToCart,
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 20),
@@ -497,9 +508,6 @@ class _EditCupState extends State<EditCupPage> {
                       cup.updateSyrupOne(
                           value, ingredients.size, ingredients.empty);
                     });
-                    print("");
-                    print(value);
-                    print(ingredients.empty);
                   },
                   update: update,
                 ),
@@ -797,6 +805,12 @@ class _EditCupState extends State<EditCupPage> {
               ),
             ],
           ),
+        ),
+      ),
+      endDrawer: Drawer(
+        backgroundColor: Colors.grey[900],
+        child: cartDawer(
+          box: widget.box,
         ),
       ),
     );

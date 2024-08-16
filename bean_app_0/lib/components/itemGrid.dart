@@ -1,3 +1,4 @@
+import 'package:bean_app_0/data/tempDataBase.dart';
 import "package:flutter/material.dart";
 
 import '../pages/editCupPage.dart';
@@ -6,14 +7,25 @@ import 'cupCard.dart';
 class ItemGrid extends StatelessWidget {
   final String title;
   final Function() toggleExpand;
-  final stack;
+  final int stacki;
+  final TempDataBase box;
+  late var stack;
 
-  const ItemGrid({
+  ItemGrid({
     super.key,
     required this.title,
     required this.toggleExpand,
-    required this.stack,
-  });
+    required this.box,
+    required this.stacki,
+  }) {
+    if (stacki == 0) {
+      stack = box.tempList[0];
+    } else if (stacki == 1) {
+      stack = box.tempList[1];
+    } else {
+      stack = box.tempList[2];
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +70,7 @@ class ItemGrid extends StatelessWidget {
                           MaterialPageRoute(
                               builder: (context) => EditCupPage(
                                     originalCup: stack[index % 7],
+                                    box: box,
                                   )),
                         );
                       },
