@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "339349232348",
-    "project_id": "bionicbean-be5d8",
-    "storage_bucket": "bionicbean-be5d8.appspot.com"
+    "project_number": "788870623427",
+    "project_id": "bionicbean0",
+    "storage_bucket": "bionicbean0.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:339349232348:android:a188f2aa6e5c0ca0d07219",
+        "mobilesdk_app_id": "1:788870623427:android:3ebfa39c7b029c01d07276",
         "android_client_info": {
           "package_name": "com.example.bean_app_0"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAfWHbAilJO_Gw9v-ClZ_p1ue7IpZT3CaA"
+          "current_key": "AIzaSyALgaPqvCCZo128EcYJcaYos9-uWc2wKCc"
         }
       ],
       "services": {

@@ -102,13 +102,13 @@ class CupImage extends StatelessWidget {
           ],
         ),
       ),
-      Center(
-        child: Image.asset(
-          'lib/images/SmallCup.png',
-          height: 149.6 * size,
-          width: 200 * size,
-        ),
-      )
+      // Center(
+      //   child: Image.asset(
+      //     'lib/images/SmallCup.png',
+      //     height: 149.6 * size,
+      //     width: 200 * size,
+      //   ),
+      // )
     ]);
   }
 }

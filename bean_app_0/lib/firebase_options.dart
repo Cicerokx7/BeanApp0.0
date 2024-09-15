@@ -27,10 +27,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -44,38 +41,49 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBfnDOzQQlKsQoN1iK17W6GzicdB7yQbhk',
-    appId: '1:339349232348:web:6524c34054fa5df8d07219',
-    messagingSenderId: '339349232348',
-    projectId: 'bionicbean-be5d8',
-    authDomain: 'bionicbean-be5d8.firebaseapp.com',
-    storageBucket: 'bionicbean-be5d8.appspot.com',
-    measurementId: 'G-J24L9PLQK4',
+    apiKey: 'AIzaSyAQRnjVLgsF3y8oqnXOFJqTjus7E6bn8wM',
+    appId: '1:788870623427:web:3725a4df0cc134d1d07276',
+    messagingSenderId: '788870623427',
+    projectId: 'bionicbean0',
+    authDomain: 'bionicbean0.firebaseapp.com',
+    storageBucket: 'bionicbean0.appspot.com',
+    measurementId: 'G-3RQB517BXD',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAfWHbAilJO_Gw9v-ClZ_p1ue7IpZT3CaA',
-    appId: '1:339349232348:android:a188f2aa6e5c0ca0d07219',
-    messagingSenderId: '339349232348',
-    projectId: 'bionicbean-be5d8',
-    storageBucket: 'bionicbean-be5d8.appspot.com',
+    apiKey: 'AIzaSyALgaPqvCCZo128EcYJcaYos9-uWc2wKCc',
+    appId: '1:788870623427:android:3ebfa39c7b029c01d07276',
+    messagingSenderId: '788870623427',
+    projectId: 'bionicbean0',
+    storageBucket: 'bionicbean0.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDdKhYh6M35KWzuHy1LROBvxjcYXwjjh9s',
-    appId: '1:339349232348:ios:71b4579651cac990d07219',
-    messagingSenderId: '339349232348',
-    projectId: 'bionicbean-be5d8',
-    storageBucket: 'bionicbean-be5d8.appspot.com',
+    apiKey: 'AIzaSyAyUYpycIpFp2NCT5oYNHyzCR5v86wB8xM',
+    appId: '1:788870623427:ios:019e21f896efcdd9d07276',
+    messagingSenderId: '788870623427',
+    projectId: 'bionicbean0',
+    storageBucket: 'bionicbean0.appspot.com',
     iosBundleId: 'com.example.beanApp0',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDdKhYh6M35KWzuHy1LROBvxjcYXwjjh9s',
-    appId: '1:339349232348:ios:10a7df30e24dd72cd07219',
-    messagingSenderId: '339349232348',
-    projectId: 'bionicbean-be5d8',
-    storageBucket: 'bionicbean-be5d8.appspot.com',
-    iosBundleId: 'com.example.beanApp0.RunnerTests',
+    apiKey: 'AIzaSyAyUYpycIpFp2NCT5oYNHyzCR5v86wB8xM',
+    appId: '1:788870623427:ios:019e21f896efcdd9d07276',
+    messagingSenderId: '788870623427',
+    projectId: 'bionicbean0',
+    storageBucket: 'bionicbean0.appspot.com',
+    iosBundleId: 'com.example.beanApp0',
   );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyAQRnjVLgsF3y8oqnXOFJqTjus7E6bn8wM',
+    appId: '1:788870623427:web:8907493480385b2ed07276',
+    messagingSenderId: '788870623427',
+    projectId: 'bionicbean0',
+    authDomain: 'bionicbean0.firebaseapp.com',
+    storageBucket: 'bionicbean0.appspot.com',
+    measurementId: 'G-M0XCVWFQQB',
+  );
+
 }
